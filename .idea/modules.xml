@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/MT5Profiler-ChangeProfile.iml" filepath="$PROJECT_DIR$/MT5Profiler-ChangeProfile.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../sendmessage/sendmessage.iml" filepath="$PROJECT_DIR$/../sendmessage/sendmessage.iml" />
     </modules>
   </component>
 </project>
