@@ -18,7 +18,6 @@ def wrong_request():
             "platforms":["MT5_REAL", "MT5_REAL2"]
                         }
             }
-
     FinishResult = trueurl(data)
     if FinishResult[0] == 'invalid uri':
         if FinishResult[1] == 3:
@@ -31,6 +30,5 @@ def wrong_request():
         result = 'result - Failed'
         f.write(datetime.now().strftime("%H:%M:%S") + '   result - Failed: wrong response\n')
     return result
-    f.write(datetime.now().strftime("%H:%M:%S")+'   ' + result)
 ###################################################################
 f.close()
