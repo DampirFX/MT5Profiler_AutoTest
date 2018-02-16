@@ -5,8 +5,8 @@ def parsers(s):
     #print('Response\n' + s)
     parsed_string = json.loads(s)
     if len(parsed_string) == 3:
-        DescResult = parsed_string["Description"]
-        StatusResult = parsed_string["Status"]
+        DescResult = parsed_string["description"]
+        StatusResult = parsed_string["status"]
         parsed_string_platforms = parsed_string["result"]                 #Ответ по серверам
         i = 0
         AllPlatforms = []
@@ -24,8 +24,8 @@ def parsers(s):
                 i = i + 1
             return DescResult,StatusResult,AllPlatforms
     else:
-        DescResult = parsed_string["Description"]
-        StatusResult = parsed_string["Status"]
+        DescResult = parsed_string["description"]
+        StatusResult = parsed_string["status"]
     return DescResult, StatusResult
 
 
@@ -36,6 +36,6 @@ def parsers(s):
 #Работа с серверами из Result
 #FinishResult[0]                 - первый сервер
 #FinishResult[n-1]               - n ый сервер
-#FinishResult[0]["Description"]  - Description первого сервера
-#FinishResult[0]["Platform"]       - Server первого сервера
-#FinishResult[0]["Status"]       - Status первого сервера
+#FinishResult[0]["description"]  - Description первого сервера
+#FinishResult[0]["platform"]       - Server первого сервера
+#FinishResult[0]["status"]       - Status первого сервера
