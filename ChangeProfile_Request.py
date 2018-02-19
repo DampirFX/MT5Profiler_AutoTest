@@ -21,4 +21,3 @@ def falseurl(data):
     answer = requests.post(url, data=json.dumps(data), headers=headers)
     FinishResult = answer.json()
     return FinishResult
-    return FinishResult
