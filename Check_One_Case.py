@@ -1,4 +1,11 @@
 from Cases import *
+from DB_Connector import *
 
 
-print(value_to_platforms_two_servers_one_not_in_config())
+#print(check_db())
+result=db_connection("SELECT mode, ActionValueUInt,ActionType FROM mt5_routing where name='CFD Timeout'")
+print(result)
+if result == [0,3000,3]:
+    print('OK')
+else:
+    print('false')

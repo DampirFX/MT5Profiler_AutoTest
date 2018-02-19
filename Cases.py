@@ -1,5 +1,6 @@
 from ChangeProfile_Request import *
 import allure
+from DB_Connector import *
 
 
 #############################################################################
@@ -171,3 +172,11 @@ def no_connection_with_server():
     FinishResult = trueurl(data)
     return FinishResult
 #############################################################################
+#############################################################################
+#############################################################################
+def check_db():
+    result=db_connection("SELECT mode, ActionValueUInt,ActionType FROM mt5_routing where name='CFD Timeout'")
+    if result == [0,3000,3]:
+        print('OK')
+    else:
+        print('false')
