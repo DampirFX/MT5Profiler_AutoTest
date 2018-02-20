@@ -172,11 +172,8 @@ def no_connection_with_server():
     FinishResult = trueurl(data)
     return FinishResult
 #############################################################################
+#Check DB (work service with MT5Server)
 #############################################################################
-#############################################################################
-def check_db():
-    result=db_connection("SELECT mode, ActionValueUInt,ActionType FROM mt5_routing where name='CFD Timeout'")
-    if result == [0,3000,3]:
-        print('OK')
-    else:
-        print('false')
+def check_db():                                                                                                    #Описать тест задать несколько файлов с конфигурацией для проверок
+    result = db_connection("SELECT mode, ActionValueUInt,ActionType FROM mt5_routing where name='CFD Timeout'")
+    return result
