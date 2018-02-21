@@ -73,16 +73,39 @@ class Test_ChangeProfile():
             assert not_found_platform_in_profile() == {'Description': 'One or more updates are failed', 'Result': [{'Description': 'No information in config', 'Status': 2, 'platform': 'MT5_TEST'}], 'Status': 7}
         def test_value_to_platforms_two_servers_one_not_in_config(resource_setup):
             value_to_platforms_two_servers_one_not_in_config() == {'Description': 'One or more updates are failed', 'Result': [{'Description': 'Done', 'Status': 0, 'platform': 'MT5_DEMO'}, {'Description': 'No connection', 'Status': 6, 'platform': 'MT5_TEST'}], 'Status': 7}
+
 #############################################################################
 #Проверка запроса Reload
 #############################################################################
-#class Test_Reload():
-#    def test_reload(self):
-#        assert reload() == 'dasrfsdfds'
+
+class Test_ReloadProfiles():
+    def test_true_reload(self):
+        assert true_reload() == {'Description': 'Done', 'Status': 0}
+    def test_false_reload(self):
+        assert false_reload() == {'Description': 'invalid uri', 'Status': 3}
+
 #############################################################################
+#Check invalid json
+#############################################################################
+
+class Test_valid_json():
+    def test_no_valid_json_1(resource_setup):
+        assert no_valid_json_1() == {'Description': 'in Json::Value::operator[](char const*)const: requires objectValue', 'Status': 1}
+
+#############################################################################
+#Check data in db
+#############################################################################
+
 class Test_Data_in_DB():
-    def test_check_db(resource_setup):
-        mode,value,type = check_db()
-        assert mode == 1
-        assert value == 2000
-        assert type == 3
+        def test_check_db_first(resource_setup):
+            finres,res1,res2,res3 = check_db_first()
+            assert finres == {"Description": "Done","Result": [{"Description": "Done","Status": 0,"platform": "MT5_REAL"},{"Description": "Done","Status": 0,"platform": "MT5_DEMO"}],"Status": 0}
+            assert res1 == (0,2000,3)
+            assert res2 == (0,4000,3)
+            assert res3 == (0,1000,3)
+        def test_check_db_second(resource_setup):
+            finres,res1,res2,res3 = check_db_second()
+            assert finres == {"Description": "Done","Result": [{"Description": "Done","Status": 0,"platform": "MT5_REAL"},{"Description": "Done","Status": 0,"platform": "MT5_DEMO"}],"Status": 0}
+            assert res1 == (1,3000,3)
+            assert res2 == (1,2000,3)
+            assert res3 == (1,2000,3)
