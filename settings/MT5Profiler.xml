@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<settings version="MT5Profiler v1.00.00">
+	<logger log-level="1" log-dir="logs"/>
+	<interface port="9977"/>
+	<mt5-servers>
+		<mt5-server name="MT5_REAL" address="172.16.1.42" port="443" login="1102" password="1q2w3e" reconnect-timeout="15"/>
+		<mt5-server name="MT5_DEMO" address="172.16.1.78" port="443" login="1103" password="1q2w3e" reconnect-timeout="15"/>
+	</mt5-servers>
+	<profiles dir="profiles/"/>
+</settings>

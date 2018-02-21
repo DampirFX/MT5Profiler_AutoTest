@@ -3,6 +3,7 @@ from ReloadProfiles_Request import *
 import allure
 from DB_Connector import *
 import time
+import json
 
 
 #############################################################################
@@ -182,10 +183,15 @@ def no_connection_with_server():
 #############################################################################
 def no_valid_json_1():
     allure.description("No valid json 1")
-    data = '{"tradingProfile:{"name":"Default","platforms":["MT5_DEMO"]}}'
+    data = '{"tradingProfile":{"name":"Default","platforms":["MT5_DEMO"]}}'
     FinishResult = trueurl(data)
     return FinishResult
 
+def no_valid_json_2():
+    allure.description("No valid json 2")
+    data = "{\"tradingProfile:{\"name\":\"Default\",\"platforms\":[\"MT5_DEMO\"]}}"
+    FinishResult = trueurl_without_json(data)
+    return FinishResult
 #############################################################################
 #Check DB (work service with MT5Server)
 #############################################################################

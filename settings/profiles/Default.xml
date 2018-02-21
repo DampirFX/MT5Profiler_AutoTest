@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<profile name="Default">
+    <platform name="MT5_REAL">
+        <routes>
+            <route name="CFD Timeout" mode="MODE_ENABLED" param="2000"/><!-- -->
+            <route name="Experts Timeout" mode="MODE_ENABLED" param="3000"/>
+        </routes>
+    </platform>
+    <platform name="MT5_DEMO">
+        <routes>
+            <route name="CFD Timeout" param="2000"/>
+        </routes>
+    </platform>  
+</profile>

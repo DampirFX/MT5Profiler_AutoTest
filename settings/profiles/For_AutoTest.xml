@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<profile name="For_AutoTest">  
+  <platform name="MT5_DEMO">
+        <routes>
+           <route name="CFD Timeout" mode="MODE_ENABLED" param="2000"/>  
+        </routes>
+    </platform>
+    <platform name="MT5_REAL">
+      <routes>
+        <route name="CFD Timeout" mode="MODE_ENABLED" param="1000"/>  
+	<route name="Experts Timeout" mode="MODE_ENABLED" param="1000"/> 
+        </routes> 
+    </platform>
+    <platform name="MT5_TEST">
+      <routes>
+        <route name="CFD Timeout" />  
+	<route name="Process to dealer" mode="MODE_ENABLED" param="1"/> 
+	<route name="ConfirmWebAPIRequest" mode="MODE_ENABLED" param="1000"/> 
+        </routes> 
+    </platform>
+</profile>  

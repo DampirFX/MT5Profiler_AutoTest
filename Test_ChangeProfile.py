@@ -65,6 +65,8 @@ class Test_ChangeProfile():
             assert no_value_to_name() == {'Description': "can't find profile ''", 'Status': 5}
         def test_not_found_profile_for_name_value(resource_setup):
             assert not_found_profile_for_name_value() == {'Description': "can't find profile 'for test'", 'Status': 5}
+        def test_no_valid_json_2(resource_setup):
+            assert no_valid_json_2() == {'Description': 'invalid json', 'Status': 5}
         def test_value_to_platforms_not_str(resource_setup):
             assert value_to_platforms_not_str() == {'Description': 'platform element not string', 'Status': 5}
         def test_no_connection_with_server(resource_setup):
@@ -91,6 +93,8 @@ class Test_ReloadProfiles():
 class Test_valid_json():
     def test_no_valid_json_1(resource_setup):
         assert no_valid_json_1() == {'Description': 'in Json::Value::operator[](char const*)const: requires objectValue', 'Status': 1}
+    def test_no_valid_json_2(resource_setup):
+        assert no_valid_json_2() == {'Description': 'invalid json', 'Status': 5}
 
 #############################################################################
 #Check data in db
