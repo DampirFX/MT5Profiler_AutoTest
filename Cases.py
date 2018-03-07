@@ -3,7 +3,6 @@ from ReloadProfiles_Request import *
 import allure
 from DB_Connector import *
 import time
-import json
 
 
 #############################################################################
