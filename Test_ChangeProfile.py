@@ -100,16 +100,16 @@ class Test_valid_json():
 #Check data in db
 #############################################################################
 
-class Test_Data_in_DB():
-        def test_check_db_first(resource_setup):
-            finres,res1,res2,res3 = check_db_first()
-            assert finres == {"Description": "Done","Result": [{"Description": "Done","Status": 0,"platform": "MT5_REAL"},{"Description": "Done","Status": 0,"platform": "MT5_DEMO"}],"Status": 0}
-            assert res1 == (0,2000,3)
-            assert res2 == (0,4000,3)
-            assert res3 == (0,1000,3)
-        def test_check_db_second(resource_setup):
-            finres,res1,res2,res3 = check_db_second()
-            assert finres == {"Description": "Done","Result": [{"Description": "Done","Status": 0,"platform": "MT5_REAL"},{"Description": "Done","Status": 0,"platform": "MT5_DEMO"}],"Status": 0}
-            assert res1 == (1,3000,3)
-            assert res2 == (1,2000,3)
-            assert res3 == (1,2000,3)
+# class Test_Data_in_DB():
+#         def test_check_db_first(resource_setup):
+#             finres,res1,res2,res3 = check_db_first()
+#             assert finres == {"Description": "Done","Result": [{"Description": "Done","Status": 0,"platform": "MT5_REAL"},{"Description": "Done","Status": 0,"platform": "MT5_DEMO"}],"Status": 0}
+#             assert res1 == (0,2000,3)
+#             assert res2 == (0,4000,3)
+#             assert res3 == (0,1000,3)
+#         def test_check_db_second(resource_setup):
+#             finres,res1,res2,res3 = check_db_second()
+#             assert finres == {"Description": "Done","Result": [{"Description": "Done","Status": 0,"platform": "MT5_REAL"},{"Description": "Done","Status": 0,"platform": "MT5_DEMO"}],"Status": 0}
+#             assert res1 == (1,3000,3)
+#             assert res2 == (1,2000,3)
+#             assert res3 == (1,2000,3)
