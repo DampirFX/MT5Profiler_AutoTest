@@ -174,6 +174,7 @@ class Test_Data_in_DB():
                                                                 {'Description': 'Done', 'Status': 0, 'platform': 'MT5_INSTANT_REAL'},
                                                                 {'Description': 'Done', 'Status': 0, 'platform': 'MT5_MARKET_DEMO'},
                                                                 {'Description': 'Done', 'Status': 0, 'platform': 'MT5_INSTANT_DEMO'}], 'Status': 0}
+
             assert finres[1] == ((1,2000,3), (1,2000,3), (1,2000,3), (1,2000,3), (1,2000,3), (1,2000,3))
 
         def test_check_db_second(resource_setup):
