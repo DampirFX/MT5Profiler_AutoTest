@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<profile name="For_AutoTest_2">  
+<profile name="Crisis">
     <platform name="MT5_MARKET_REAL">
         <routes>
             <route name="All Timeout Market" param="4000"/>
@@ -22,4 +22,4 @@
             <route name="All Timeout Instant" param="4000"/>
         </routes>
     </platform>
-</profile>  
+</profile>
