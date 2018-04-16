@@ -1,5 +1,5 @@
 from Cases import *
 
 
-print(default_mode())
+print(correct_value_to_platforms_one_server())
 

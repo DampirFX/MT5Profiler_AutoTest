@@ -29,3 +29,18 @@ def db_select(db, REQUEST):
 
 def db_close_connection(db):
     db.close()
+
+def get_data_from_db():
+    db_real = db_connection("mt5_real")
+    db_demo = db_connection("mt5_demo")
+
+    R1 = db_select(db_real, "SELECT mode, ActionValueUInt,ActionType FROM mt5_routing where name='All Timeout Market'")
+    R2 = db_select(db_real, "SELECT mode, ActionValueUInt,ActionType FROM mt5_routing where name='Experts Timeout Market'")
+    R3 = db_select(db_real, "SELECT mode, ActionValueUInt,ActionType FROM mt5_routing where name='All Timeout Instant'")
+    R4 = db_select(db_real, "SELECT mode, ActionValueUInt,ActionType FROM mt5_routing where name='Experts Timeout Instant'")
+    R5 = db_select(db_demo, "SELECT mode, ActionValueUInt,ActionType FROM mt5_routing where name='All Timeout Market'")
+    R6 = db_select(db_demo, "SELECT mode, ActionValueUInt,ActionType FROM mt5_routing where name='All Timeout Instant'")
+    db_close_connection(db_real)
+    db_close_connection(db_demo)
+
+    return R1, R2, R3, R4, R5, R6

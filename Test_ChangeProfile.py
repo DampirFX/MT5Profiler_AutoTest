@@ -28,10 +28,13 @@ class Test_ChangeProfile():
         assert request_without_name() == {'Description': "can't read 'name' param", 'Status': 4}
 
     def test_request_without_platforms(resource_setup):
-        assert request_without_platforms() == {'Description': 'Done', 'Result': [{'Description': 'Done', 'Status': 0, 'platform': 'MT5_MARKET_REAL'},
-                                                                                 {'Description': 'Done', 'Status': 0, 'platform': 'MT5_MARKET_DEMO'},
-                                                                                 {'Description': 'Done', 'Status': 0, 'platform': 'MT5_INSTANT_REAL'},
-                                                                                 {'Description': 'Done', 'Status': 0, 'platform': 'MT5_INSTANT_DEMO'}], 'Status': 0}
+        finres = request_without_platforms()
+        assert finres[0] == {'Description': 'Done', 'Result': [{'Description': 'Done', 'Status': 0, 'platform': 'MT5_MARKET_REAL'},
+                                                               {'Description': 'Done', 'Status': 0, 'platform': 'MT5_MARKET_DEMO'},
+                                                               {'Description': 'Done', 'Status': 0, 'platform': 'MT5_INSTANT_REAL'},
+                                                               {'Description': 'Done', 'Status': 0, 'platform': 'MT5_INSTANT_DEMO'}], 'Status': 0}
+
+        assert finres[1] == ((1, 4000, 3), (1, 4000, 3), (1, 4000, 3), (1, 4000, 3), (1, 4000, 3), (1, 4000, 3))
 
     def test_no_value_to_name(resource_setup):
         assert no_value_to_name() == {'Description': "can't find profile ''", 'Status': 5}
@@ -40,34 +43,49 @@ class Test_ChangeProfile():
         assert value_to_name_not_str() == {'Description': "can't read 'name' param", 'Status': 4}
 
     def test_correct_value_to_name(resource_setup):
-        assert correct_value_to_name() == {'Description': 'Done', 'Result': [{'Description': 'Done', 'Status': 0, 'platform': 'MT5_MARKET_REAL'},
+        finres = correct_value_to_name()
+        assert finres[0] == {'Description': 'Done', 'Result': [{'Description': 'Done', 'Status': 0, 'platform': 'MT5_MARKET_REAL'},
                                                                              {'Description': 'Done', 'Status': 0, 'platform': 'MT5_MARKET_DEMO'},
                                                                              {'Description': 'Done', 'Status': 0, 'platform': 'MT5_INSTANT_REAL'},
                                                                              {'Description': 'Done', 'Status': 0, 'platform': 'MT5_INSTANT_DEMO'}], 'Status': 0}
+
+        assert finres[1] == ((1,2000,3), (1,2000,3), (1,2000,3), (1,2000,3), (1,2000,3), (1,2000,3))
 
     def test_not_found_profile_for_name_value(resource_setup):
         assert not_found_profile_for_name_value() == {'Description': "can't find profile 'for test'", 'Status': 5}
 
     def test_no_value_to_platforms(resource_setup):
-        assert no_value_to_platforms() == {'Description': 'Done', 'Result': [{'Description': 'Done', 'Status': 0, 'platform': 'MT5_MARKET_REAL'},
+        finres = no_value_to_platforms()
+        assert finres[0] == {'Description': 'Done', 'Result': [{'Description': 'Done', 'Status': 0, 'platform': 'MT5_MARKET_REAL'},
                                                                              {'Description': 'Done', 'Status': 0, 'platform': 'MT5_MARKET_DEMO'},
                                                                              {'Description': 'Done', 'Status': 0, 'platform': 'MT5_INSTANT_REAL'},
                                                                              {'Description': 'Done', 'Status': 0, 'platform': 'MT5_INSTANT_DEMO'}], 'Status': 0}
+
+        assert finres[1] == ((1, 4000, 3), (1, 4000, 3), (1, 4000, 3), (1, 4000, 3), (1, 4000, 3), (1, 4000, 3))
 
     def test_value_to_platforms_not_str(resource_setup):
         assert value_to_platforms_not_str() == {'Description': 'platform element not string', 'Status': 5}
 
     def test_correct_value_to_platforms_one_server(resource_setup):
-        assert correct_value_to_platforms_one_server() == {'Description': 'Done', 'Result': [{'Description': 'Done', 'Status': 0, 'platform': 'MT5_MARKET_REAL'}], 'Status': 0}
+        finres = correct_value_to_platforms_one_server()
+        assert finres[0] == {'Description': 'Done', 'Result': [{'Description': 'Done', 'Status': 0, 'platform': 'MT5_MARKET_REAL'}], 'Status': 0}
+
+        assert finres[1] == ((1, 2000, 3), (1, 2000, 3), (1, 4000, 3), (1, 4000, 3), (1, 4000, 3), (1, 4000, 3))
 
     def test_correct_value_to_platforms_two_servers(resource_setup):
-        assert correct_value_to_platforms_two_servers() == {'Description': 'Done', 'Result': [{'Description': 'Done', 'Status': 0, 'platform': 'MT5_MARKET_REAL'},
+        finres = correct_value_to_platforms_two_servers()
+        assert finres[0] == {'Description': 'Done', 'Result': [{'Description': 'Done', 'Status': 0, 'platform': 'MT5_MARKET_REAL'},
                                                                                               {'Description': 'Done', 'Status': 0, 'platform': 'MT5_MARKET_DEMO'}], 'Status': 0}
 
+        assert finres[1] == ((1, 2000, 3), (1, 2000, 3), (1, 4000, 3), (1, 4000, 3), (1, 2000, 3), (1, 4000, 3))
+
     def test_value_to_platforms_two_servers_one_not_in_config(resource_setup):
-        assert value_to_platforms_two_servers_one_not_in_config() == {'Description': 'One or more updates are failed',
+        finres = value_to_platforms_two_servers_one_not_in_config()
+        assert finres[0] == {'Description': 'One or more updates are failed',
                                                                       'Result': [{'Description': 'Done', 'Status': 0, 'platform': 'MT5_MARKET_DEMO'},
                                                                                  {'Description': 'No information in config', 'Status': 2, 'platform': 'MT5_FOR_TEST'}], 'Status': 7}
+
+        assert finres[1] == ((1, 2000, 3), (1, 2000, 3), (1, 4000, 3), (1, 4000, 3), (1, 2000, 3), (1, 4000, 3))
 
     def test_not_found_platform_in_profile(resource_setup):
         assert not_found_platform_in_profile() == {'Description': 'One or more updates are failed',
@@ -116,9 +134,12 @@ class Test_ChangeProfile():
                                                        'Result': [{'Description': 'No information in config', 'Status': 2, 'platform': 'MT5_TEST'}], 'Status': 7}
 
         def test_value_to_platforms_two_servers_one_not_in_config(resource_setup):
-            assert value_to_platforms_two_servers_one_not_in_config() == {'Description': 'One or more updates are failed',
-                                                                          'Result': [{'Description': 'Done', 'Status': 0, 'platform': 'MT5_MARKET_DEMO'},
-                                                                                     {'Description': 'No information in config', 'Status': 2, 'platform': 'MT5_FOR_TEST'}], 'Status': 7}
+            finres = value_to_platforms_two_servers_one_not_in_config()
+            assert finres[0] == {'Description': 'One or more updates are failed',
+                             'Result': [{'Description': 'Done', 'Status': 0, 'platform': 'MT5_MARKET_DEMO'},
+                                        {'Description': 'No information in config', 'Status': 2, 'platform': 'MT5_FOR_TEST'}], 'Status': 7}
+
+            assert finres[1] == ((1, 2000, 3), (1, 2000, 3), (1, 4000, 3), (1, 4000, 3), (1, 2000, 3), (1, 4000, 3))
 
 #############################################################################
 #Проверка запроса Reload
@@ -148,33 +169,27 @@ class Test_valid_json():
 
 class Test_Data_in_DB():
         def test_check_db_first(resource_setup):
-            finres, res1, res2, res3, res4, res5, res6 = check_db_first()
-            assert finres == {'Description': 'Done', 'Result': [{'Description': 'Done', 'Status': 0, 'platform': 'MT5_MARKET_REAL'},
+            finres = check_db_first()
+            assert finres[0] == {'Description': 'Done', 'Result': [{'Description': 'Done', 'Status': 0, 'platform': 'MT5_MARKET_REAL'},
                                                                 {'Description': 'Done', 'Status': 0, 'platform': 'MT5_INSTANT_REAL'},
                                                                 {'Description': 'Done', 'Status': 0, 'platform': 'MT5_MARKET_DEMO'},
                                                                 {'Description': 'Done', 'Status': 0, 'platform': 'MT5_INSTANT_DEMO'}], 'Status': 0}
-            assert res1 == (1,2000,3)
-            assert res2 == (1,2000,3)
-            assert res3 == (1,2000,3)
-            assert res4 == (1,2000,3)
-            assert res5 == (1,2000,3)
-            assert res6 == (1,2000,3)
+            assert finres[1] == ((1,2000,3), (1,2000,3), (1,2000,3), (1,2000,3), (1,2000,3), (1,2000,3))
 
         def test_check_db_second(resource_setup):
-            finres, res1, res2, res3, res4, res5, res6 = check_db_second()
-            assert finres == {'Description': 'Done', 'Result': [{'Description': 'Done', 'Status': 0, 'platform': 'MT5_MARKET_REAL'},
+            finres = check_db_second()
+            assert finres[0] == {'Description': 'Done', 'Result': [{'Description': 'Done', 'Status': 0, 'platform': 'MT5_MARKET_REAL'},
                                                                 {'Description': 'Done', 'Status': 0, 'platform': 'MT5_INSTANT_REAL'},
                                                                 {'Description': 'Done', 'Status': 0, 'platform': 'MT5_MARKET_DEMO'},
                                                                 {'Description': 'Done', 'Status': 0, 'platform': 'MT5_INSTANT_DEMO'}], 'Status': 0}
-            assert res1 == (1,4000,3)
-            assert res2 == (1,4000,3)
-            assert res3 == (1,4000,3)
-            assert res4 == (1,4000,3)
-            assert res5 == (1,4000,3)
-            assert res6 == (1,4000,3)
+
+            assert finres[1] == ((1,4000,3), (1,4000,3), (1,4000,3), (1,4000,3), (1,4000,3), (1,4000,3))
 
 def test_default_mode(resource_setup):
-    assert default_mode() == {'Description': 'Done', 'Result': [{'Description': 'Done', 'Status': 0, 'platform': 'MT5_MARKET_REAL'},
+    finres = default_mode()
+    assert finres[0] == {'Description': 'Done', 'Result': [{'Description': 'Done', 'Status': 0, 'platform': 'MT5_MARKET_REAL'},
                                                                 {'Description': 'Done', 'Status': 0, 'platform': 'MT5_MARKET_DEMO'},
                                                                 {'Description': 'Done', 'Status': 0, 'platform': 'MT5_INSTANT_REAL'},
                                                                 {'Description': 'Done', 'Status': 0, 'platform': 'MT5_INSTANT_DEMO'}], 'Status': 0}
+
+    assert finres[1] == ((1,2000,3), (1,2000,3), (1,2000,3), (1,2000,3), (1,2000,3), (1,2000,3))
