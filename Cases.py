@@ -77,7 +77,7 @@ def correct_value_to_name():
     data = {
         "tradingProfile":{
             "name":"Default",
-            "platforms":["MT5_REAL", "MT5_DEMO"]
+            "platforms":["MT5_MARKET_REAL", "MT5_MARKET_DEMO", "MT5_INSTANT_REAL", "MT5_INSTANT_DEMO"]
         }
     }
     FinishResult = trueurl(data)
@@ -88,7 +88,7 @@ def not_found_profile_for_name_value():
     data = {
         "tradingProfile":{
             "name":"for test",
-            "platforms":["MT5_REAL", "MT5_DEMO"]
+            "platforms":["MT5_MARKET_REAL", "MT5_MARKET_DEMO", "MT5_INSTANT_REAL", "MT5_INSTANT_DEMO"]
         }
     }
     FinishResult = trueurl(data)
@@ -124,7 +124,7 @@ def correct_value_to_platforms_one_server():
     data = {
         "tradingProfile":{
             "name":"Default",
-            "platforms":["MT5_REAL"]
+            "platforms":["MT5_MARKET_REAL"]
         }
     }
     FinishResult = trueurl(data)
@@ -135,7 +135,7 @@ def correct_value_to_platforms_two_servers():
     data = {
         "tradingProfile":{
             "name":"Default",
-            "platforms":["MT5_REAL","MT5_DEMO"]
+            "platforms":["MT5_MARKET_REAL","MT5_MARKET_DEMO"]
         }
     }
     FinishResult = trueurl(data)
@@ -146,7 +146,7 @@ def value_to_platforms_two_servers_one_not_in_config():
     data = {
         "tradingProfile":{
             "name":"For_AutoTest",
-            "platforms":["MT5_DEMO","MT5_TEST"]
+            "platforms":["MT5_MARKET_DEMO","MT5_FOR_TEST"]
         }
     }
     FinishResult = trueurl(data)
@@ -200,7 +200,7 @@ def check_db_first():                                                           
         data = {
             "tradingProfile":{
                 "name":"For_AutoTest_1",
-                "platforms":["MT5_REAL","MT5_DEMO"]
+                "platforms":["MT5_MARKET_REAL",  "MT5_INSTANT_REAL", "MT5_MARKET_DEMO", "MT5_INSTANT_DEMO"]
             }
         }
         FinishResult = trueurl(data)
@@ -210,14 +210,16 @@ def check_db_first():                                                           
         db_real = db_connection("mt5_real")
         db_demo = db_connection("mt5_demo")
 
-        result1 = db_select(db_real, "SELECT mode, ActionValueUInt,ActionType FROM mt5_routing where name='CFD Timeout'")
-        result2 = db_select(db_real, "SELECT mode, ActionValueUInt,ActionType FROM mt5_routing where name='Experts Timeout'")
-        result3 = db_select(db_demo, "SELECT mode, ActionValueUInt,ActionType FROM mt5_routing where name='CFD Timeout'")
-
+        R1 = db_select(db_real, "SELECT mode, ActionValueUInt,ActionType FROM mt5_routing where name='All Timeout Market'")
+        R2 = db_select(db_real, "SELECT mode, ActionValueUInt,ActionType FROM mt5_routing where name='Experts Timeout Market'")
+        R3 = db_select(db_real, "SELECT mode, ActionValueUInt,ActionType FROM mt5_routing where name='All Timeout Instant'")
+        R4 = db_select(db_real, "SELECT mode, ActionValueUInt,ActionType FROM mt5_routing where name='Experts Timeout Instant'")
+        R5 = db_select(db_demo, "SELECT mode, ActionValueUInt,ActionType FROM mt5_routing where name='All Timeout Market'")
+        R6 = db_select(db_demo, "SELECT mode, ActionValueUInt,ActionType FROM mt5_routing where name='All Timeout Instant'")
         db_close_connection(db_real)
         db_close_connection(db_demo)
 
-    return FinishResult,result1,result2,result3
+    return FinishResult, R1, R2, R3, R4, R5, R6
 #############################################################################
 def check_db_second():
     allure.description('Check data in the DB')
@@ -225,7 +227,7 @@ def check_db_second():
         data = {
             "tradingProfile":{
                 "name":"For_AutoTest_2",
-                "platforms":["MT5_REAL","MT5_DEMO"]
+                "platforms":["MT5_MARKET_REAL", "MT5_INSTANT_REAL", "MT5_MARKET_DEMO", "MT5_INSTANT_DEMO"]
             }
         }
         FinishResult = trueurl(data)
@@ -234,14 +236,30 @@ def check_db_second():
         db_real = db_connection("mt5_real")
         db_demo = db_connection("mt5_demo")
 
-        result1 = db_select(db_real, "SELECT mode, ActionValueUInt,ActionType FROM mt5_routing where name='CFD Timeout'")
-        result2 = db_select(db_real, "SELECT mode, ActionValueUInt,ActionType FROM mt5_routing where name='Experts Timeout'")
-        result3 = db_select(db_demo, "SELECT mode, ActionValueUInt,ActionType FROM mt5_routing where name='CFD Timeout'")
-
+        R1 = db_select(db_real, "SELECT mode, ActionValueUInt,ActionType FROM mt5_routing where name='All Timeout Market'")
+        R2 = db_select(db_real, "SELECT mode, ActionValueUInt,ActionType FROM mt5_routing where name='Experts Timeout Market'")
+        R3 = db_select(db_real, "SELECT mode, ActionValueUInt,ActionType FROM mt5_routing where name='All Timeout Instant'")
+        R4 = db_select(db_real, "SELECT mode, ActionValueUInt,ActionType FROM mt5_routing where name='Experts Timeout Instant'")
+        R5 = db_select(db_demo, "SELECT mode, ActionValueUInt,ActionType FROM mt5_routing where name='All Timeout Market'")
+        R6 = db_select(db_demo, "SELECT mode, ActionValueUInt,ActionType FROM mt5_routing where name='All Timeout Instant'")
         db_close_connection(db_real)
         db_close_connection(db_demo)
 
-    return FinishResult,result1,result2,result3
+    return FinishResult, R1, R2, R3, R4, R5, R6
+
+#############################################################################
+#Set default mode
+#############################################################################
+def default_mode():
+    allure.description("Set default mode")
+    data = {
+        "tradingProfile":{
+            "name":"Default",
+            "platforms":["MT5_MARKET_REAL", "MT5_MARKET_DEMO", "MT5_INSTANT_REAL", "MT5_INSTANT_DEMO"]
+        }
+    }
+    FinishResult = trueurl(data)
+    return FinishResult
 
 #############################################################################
 #Check request ReloadProfiles

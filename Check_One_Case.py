@@ -1,5 +1,5 @@
 from Cases import *
 
 
-print(no_valid_json_2())
+print(default_mode())
 
