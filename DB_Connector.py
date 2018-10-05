@@ -12,7 +12,7 @@ MAX_TIMEOUT = 10000
 
 def db_connection(PATH):
     db = MySQLdb.connect(host= IP, port=PORT, user=LOGIN, passwd=PASSWORD, db=PATH)
-    return  db
+    return db
 
 def db_select(db, REQUEST):
     start_time = time.time()
@@ -20,10 +20,10 @@ def db_select(db, REQUEST):
         c = db.cursor()
         c.execute(REQUEST)
         db_resp = c.fetchone()
-        if db_resp is not None:
+        if db_resp != 'None':
             break
         time.sleep(REPEAT_INTERVAL)
-    if db_resp is None:
+    if db_resp == 'None':
         print('No response')
     else:
         return(db_resp)
@@ -34,7 +34,6 @@ def db_close_connection(db):
 def get_data_from_db():
     db_real = db_connection("mt5_real")
     db_demo = db_connection("mt5_demo")
-
     R1 = db_select(db_real, "SELECT mode, ActionValueUInt,ActionType FROM mt5_routing where name='All Timeout Market'")
     R2 = db_select(db_real, "SELECT mode, ActionValueUInt,ActionType FROM mt5_routing where name='Experts Timeout Market'")
     R3 = db_select(db_real, "SELECT mode, ActionValueUInt,ActionType FROM mt5_routing where name='All Timeout Instant'")
