@@ -20,10 +20,10 @@ def db_select(db, REQUEST):
         c = db.cursor()
         c.execute(REQUEST)
         db_resp = c.fetchone()
-        if db_resp != 'None':
+        if db_resp is not 'None':
             break
         time.sleep(REPEAT_INTERVAL)
-    if db_resp == 'None':
+    if db_resp is 'None':
         print('No response')
     else:
         return(db_resp)

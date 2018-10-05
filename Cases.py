@@ -46,12 +46,10 @@ def request_without_platforms():
             "tradingProfile":{"name":"Crisis"}
         }
         FinishResult = trueurl(data)
-        print(FinishResult)
     time.sleep(2)
 
     with allure.step('Check data in the DB'):
         db_data = get_data_from_db()
-        print(db_data)
     return FinishResult, db_data
 
 #############################################################################
