@@ -14,6 +14,7 @@ def resource_setup(request):
 #############################################################################
 #Проверка запроса ChangeProfile
 #############################################################################
+
 class Test_ChangeProfile():
     def test_wrong_request(resource_setup):
         assert wrong_request() == {'Description': 'invalid uri', 'Status': 3}
