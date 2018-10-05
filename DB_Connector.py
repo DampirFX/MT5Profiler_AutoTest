@@ -9,6 +9,7 @@ PASSWORD = '1q2w3e4r'
 REPEAT_INTERVAL = 100
 MAX_TIMEOUT = 10000
 
+
 def db_connection(PATH):
     db = MySQLdb.connect(host= IP, port=PORT, user=LOGIN, passwd=PASSWORD, db=PATH)
     return  db
