@@ -12,8 +12,8 @@ def wrong_request():
     allure.description("Check wrong request")
     data = {
         "tradingProfile":{
-            "name":"Default",
-            "platforms":["MT5_MARKET_REAL", "MT5_MARKET_DEMO"]
+            "name":"Default_for_autotest",
+            "platforms":["MT5_MARKET_REAL"]
                         }
             }
     FinishResult = falseurl(data)
@@ -34,7 +34,7 @@ def request_without_name_and_platform():
 def request_without_name():
     allure.description("No parameter name on request")
     data = {
-        "tradingProfile":{"platforms":["MT5_MARKET_REAL", "MT5_MARKET_DEMO"]}
+        "tradingProfile":{"platforms":["MT5_MARKET_REAL"]}
     }
     FinishResult = trueurl(data)
     return FinishResult
@@ -43,10 +43,10 @@ def request_without_platforms():
     allure.description("No parameter platforms on request")
     with allure.step("Sending a request"):
         data = {
-            "tradingProfile":{"name":"Crisis"}
+            "tradingProfile":{"name":"Crisis_for_autotest"}
         }
         FinishResult = trueurl(data)
-    time.sleep(2)
+    time.sleep(5)
 
     with allure.step('Check data in the DB'):
         db_data = get_data_from_db()
@@ -60,7 +60,7 @@ def no_value_to_name():
     data = {
         "tradingProfile":{
             "name":"",
-            "platforms":["MT5_INSTANT_REAL", "MT5_INSTANT_DEMO"]
+            "platforms":["MT5_INSTANT_REAL"]
         }
     }
     FinishResult = trueurl(data)
@@ -71,7 +71,7 @@ def value_to_name_not_str():
     data = {
         "tradingProfile":{
             "name":123456,
-            "platforms":["MT5_INSTANT_REAL", "MT5_INSTANT_DEMO"]
+            "platforms":["MT5_INSTANT_REAL"]
         }
     }
     FinishResult = trueurl(data)
@@ -82,12 +82,12 @@ def correct_value_to_name():
     with allure.step("Sending a request"):
         data = {
             "tradingProfile":{
-                "name":"Default",
-                "platforms":["MT5_MARKET_REAL", "MT5_MARKET_DEMO", "MT5_INSTANT_REAL", "MT5_INSTANT_DEMO"]
+                "name":"Default_for_autotest",
+                "platforms":["MT5_MARKET_REAL", "MT5_INSTANT_REAL"]
             }
         }
         FinishResult = trueurl(data)
-    time.sleep(2)
+    time.sleep(5)
 
     with allure.step('Check data in the DB'):
         db_data = get_data_from_db()
@@ -99,7 +99,7 @@ def not_found_profile_for_name_value():
     data = {
         "tradingProfile":{
             "name":"for test",
-            "platforms":["MT5_MARKET_REAL", "MT5_MARKET_DEMO", "MT5_INSTANT_REAL", "MT5_INSTANT_DEMO"]
+            "platforms":["MT5_MARKET_REAL", "MT5_INSTANT_REAL"]
         }
     }
     FinishResult = trueurl(data)
@@ -113,12 +113,12 @@ def no_value_to_platforms():
     with allure.step("Sending a request"):
         data = {
             "tradingProfile":{
-                "name":"Crisis",
+                "name":"Crisis_for_autotest",
                 "platforms":[]
             }
         }
         FinishResult = trueurl(data)
-    time.sleep(2)
+    time.sleep(5)
 
     with allure.step('Check data in the DB'):
         db_data = get_data_from_db()
@@ -128,7 +128,7 @@ def value_to_platforms_not_str():
     allure.description("Value to platforms not str")
     data = {
         "tradingProfile":{
-            "name":"Default",
+            "name":"Default_for_autotest",
             "platforms":[123456]
         }
     }
@@ -140,12 +140,12 @@ def correct_value_to_platforms_one_server():
     with allure.step("Sending a request"):
         data = {
             "tradingProfile":{
-                "name":"Default",
+                "name":"Default_for_autotest",
                 "platforms":["MT5_MARKET_REAL"]
             }
         }
         FinishResult = trueurl(data)
-    time.sleep(2)
+    time.sleep(5)
     with allure.step('Check data in the DB'):
         db_data = get_data_from_db()
     return FinishResult, db_data
@@ -155,12 +155,12 @@ def correct_value_to_platforms_two_servers():
     with allure.step("Sending a request"):
         data = {
             "tradingProfile":{
-                "name":"Default",
-                "platforms":["MT5_MARKET_REAL","MT5_MARKET_DEMO"]
+                "name":"Default_for_autotest",
+                "platforms":["MT5_MARKET_REAL","MT5_INSTANT_REAL"]
             }
         }
         FinishResult = trueurl(data)
-    time.sleep(2)
+    time.sleep(5)
 
     with allure.step('Check data in the DB'):
         db_data = get_data_from_db()
@@ -172,11 +172,11 @@ def value_to_platforms_two_servers_one_not_in_config():
         data = {
             "tradingProfile":{
                 "name":"For_AutoTest",
-                "platforms":["MT5_MARKET_DEMO","MT5_FOR_TEST"]
+                "platforms":["MT5_MARKET_REAL","MT5_FOR_TEST"]
             }
         }
         FinishResult = trueurl(data)
-    time.sleep(2)
+    time.sleep(5)
 
     with allure.step('Check data in the DB'):
         db_data = get_data_from_db()
@@ -186,7 +186,7 @@ def not_found_platform_in_profile():
     allure.description("Not found platform in the profile")
     data = {
         "tradingProfile":{
-            "name":"Default",
+            "name":"Default_for_autotest",
             "platforms":["MT5_TEST"]
         }
     }
@@ -212,13 +212,13 @@ def no_connection_with_server():
 #############################################################################
 def no_valid_json_1():
     allure.description("No valid json 1")
-    data = '{"tradingProfile":{"name":"Default","platforms":["MT5_DEMO"]}}'
+    data = '{"tradingProfile":{"name":"Default_for_autotest","platforms":["MT5_MARKET_REAL"]}}'
     FinishResult = trueurl(data)
     return FinishResult
 
 def no_valid_json_2():
     allure.description("No valid json 2")
-    data = "{\"tradingProfile:{\"name\":\"Default\",\"platforms\":[\"MT5_DEMO\"]}}"
+    data = "{\"tradingProfile:{\"name\":\"Default_for_autotest\",\"platforms\":[\"MT5_MARKET_REAL\"]}}"
     FinishResult = trueurl_without_json(data)
     return FinishResult
 #############################################################################
@@ -230,11 +230,11 @@ def check_db_first():                                                           
         data = {
             "tradingProfile":{
                 "name":"For_AutoTest_1",
-                "platforms":["MT5_MARKET_REAL",  "MT5_INSTANT_REAL", "MT5_MARKET_DEMO", "MT5_INSTANT_DEMO"]
+                "platforms":["MT5_MARKET_REAL",  "MT5_INSTANT_REAL"]
             }
         }
         FinishResult = trueurl(data)
-    time.sleep(2)
+    time.sleep(5)
 
     with allure.step('Check data in the DB'):
         db_data = get_data_from_db()
@@ -247,11 +247,11 @@ def check_db_second():
         data = {
             "tradingProfile":{
                 "name":"For_AutoTest_2",
-                "platforms":["MT5_MARKET_REAL", "MT5_INSTANT_REAL", "MT5_MARKET_DEMO", "MT5_INSTANT_DEMO"]
+                "platforms":["MT5_MARKET_REAL", "MT5_INSTANT_REAL"]
             }
         }
         FinishResult = trueurl(data)
-    time.sleep(2)
+    time.sleep(5)
 
     with allure.step('Check data in the DB'):
         db_data = get_data_from_db()
@@ -265,12 +265,12 @@ def default_mode():
     with allure.step("Sending a request"):
         data = {
             "tradingProfile":{
-                "name":"Default",
-                "platforms":["MT5_MARKET_REAL", "MT5_MARKET_DEMO", "MT5_INSTANT_REAL", "MT5_INSTANT_DEMO"]
+                "name":"Default_for_autotest",
+                "platforms":["MT5_MARKET_REAL", "MT5_INSTANT_REAL"]
             }
         }
         FinishResult = trueurl(data)
-    time.sleep(2)
+    time.sleep(5)
 
     with allure.step('Check data in the DB'):
         db_data = get_data_from_db()

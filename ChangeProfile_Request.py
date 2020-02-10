@@ -4,7 +4,7 @@ import json
 
 def trueurl(data):
     st = ''
-    url = 'http://172.16.1.63:9977/ChangeProfile'       #MT5 - .42:9968  MT4 - .135:9967
+    url = 'http://mt5sharedservices.mt.qa-env.com:9977/ChangeProfile'       #MT5 - .42:9968  MT4 - .135:9967
     headers = {'Content-type': 'application/json',    # Определение типа данных
                'Accept': 'text/plain',
                'Content-Encoding': 'utf-8'}
@@ -14,7 +14,7 @@ def trueurl(data):
 
 def trueurl_without_json(data):
     st = ''
-    url = 'http://172.16.1.63:9977/ChangeProfile'       #MT5 - .42:9968  MT4 - .135:9967
+    url = 'http://mt5sharedservices.mt.qa-env.com:9977/ChangeProfile'       #MT5 - .42:9968  MT4 - .135:9967
     headers = {'Content-type': 'application/json',    # Определение типа данных
                'Accept': 'text/plain',
                'Content-Encoding': 'utf-8'}
@@ -23,7 +23,7 @@ def trueurl_without_json(data):
     return FinishResult
 
 def falseurl(data):
-    url = 'http://172.16.1.63:9977/ChangeProfiletst'       #MT5 - .42:9966  MT4 - .135:9967
+    url = 'http://mt5sharedservices.mt.qa-env.com:9977/ChangeProfiletst'       #MT5 - .42:9966  MT4 - .135:9967
     headers = {'Content-type': 'application/json',    # Определение типа данных
                'Accept': 'text/plain',
                'Content-Encoding': 'utf-8'}
