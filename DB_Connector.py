@@ -40,7 +40,6 @@ def get_data_from_db():
     R5 = db_select(db_real, "SELECT mode, ActionValueUInt,ActionType FROM mt5_routing where name='Experts Timeout Market 1'")
     R6 = db_select(db_real, "SELECT mode, ActionValueUInt,ActionType FROM mt5_routing where name='All Timeout Market 2'")
     R7 = db_select(db_real, "SELECT mode, ActionValueUInt,ActionType FROM mt5_routing where name='Experts Timeout Market 2'")
-
     R8 = db_select(db_real, "SELECT mode, ActionValueUInt,ActionType FROM mt5_routing where name='Forex Timeout Market'")
     R9 = db_select(db_real, "SELECT mode, ActionValueUInt,ActionType FROM mt5_routing where name='RU Timeout Market'")
     R10 = db_select(db_real, "SELECT mode, ActionValueUInt,ActionType FROM mt5_routing where name='Energy Timeout Market'")
@@ -51,3 +50,13 @@ def get_data_from_db():
     db_close_connection(db_real)
 
     return R1, R2, R3, R4, R5, R6, R7, R8, R9, R10, R11, R12, R13, R14
+
+# def cill_connection():
+#     mass = (99360, 99475, 99581, 99656, 99792, 99892, 100067, 100167, 100412, 100601, 100706, 100846, 100965, 101338, 101541, 101714, 101965, 102117, 102312, 102445, 102537, 102743, 103097, 103342, 103410, 104379, 104468, 104775, 105052, 105248, 105353, 105781, 106108, 106466, 106541, 106690, 106839)
+#     db = db_connection("fxqatservice")
+#     for i in mass:
+#         print(i)
+#         db_select(db,'kill connection ' + str(i))
+#     db_close_connection(db)
+#
+# cill_connection()

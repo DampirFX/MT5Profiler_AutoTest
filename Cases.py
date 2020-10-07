@@ -1,5 +1,4 @@
-from ChangeProfile_Request import *
-from ReloadProfiles_Request import *
+from ConnectorMT5Profiler import Connection
 import allure
 from DB_Connector import *
 import time
@@ -10,12 +9,7 @@ import time
 #############################################################################
 def wrong_request():
     allure.description("Check wrong request")
-    data = {
-        "tradingProfile":{
-            "name":"Default_for_autotest",
-            "platforms":["MT5_MARKET_REAL"]
-                        }
-            }
+
     FinishResult = falseurl(data)
     return FinishResult
 #############################################################################
@@ -275,17 +269,3 @@ def default_mode():
     with allure.step('Check data in the DB'):
         db_data = get_data_from_db()
     return FinishResult, db_data
-
-#############################################################################
-#Check request ReloadProfiles
-#############################################################################
-def true_reload():
-    allure.description('Check true request ReloadProfiles')
-    FinishResult = reload_trueurl()
-    return FinishResult
-#############################################################################
-def false_reload():
-    allure.description('Check false request ReloadProfiles')
-    FinishResult = reload_falseurl()
-    return FinishResult
-#############################################################################
