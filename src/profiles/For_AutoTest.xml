@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<profile name="For_AutoTest">  
+    <platform name="MT5_MARKET_REAL">
+        <routes>
+            <route name="Forex Timeout Market" param="3000"/>
+            <route name="RU Timeout Market" param="3000"/>
+            <route name="Energy Timeout Market" param="3000"/>
+            <route name="All Timeout Market 1" param="3000"/>
+            <route name="Experts Timeout Market 1" param="3000"/>
+            <route name="All Timeout Market 2" param="5000"/>
+            <route name="Experts Timeout Market 2" param="5000"/>
+        </routes>
+    </platform>
+    <platform name="MT5_INSTANT_REAL">
+        <routes>
+            <route name="Forex Timeout Instant" param="4000"/>
+            <route name="RU Timeout Instant" param="4000"/>
+            <route name="Energy Timeout Instant" param="4000"/>
+            <route name="All Timeout Instant 1" param="4000"/>
+            <route name="Experts Timeout Instant 1" param="5000"/>
+            <route name="All Timeout Instant 2" param="3000"/>
+            <route name="Experts Timeout Instant 2" param="3000"/>
+        </routes>
+    </platform>
+    <platform name="MT5_TEST">
+        <routes>
+            <route name="All Timeout Instant" param="2000"/>
+        </routes>
+    </platform>
+</profile>  
