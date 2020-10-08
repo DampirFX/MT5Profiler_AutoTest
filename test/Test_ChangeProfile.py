@@ -1,6 +1,6 @@
 import pytest
-from src.ConnectorMT5Profiler import Connection
-from src.DB_Connector import get_data_from_db
+from src.ConnectorMT5Profiler import Connection_To_MT5Profiler
+from src.DB_Connector import Connection_To_DB
 
 
 default_list = ((1, 0, 3), (1, 0, 3), (1, 0, 3),(1, 0, 3),(1, 1000, 3),(1, 2000, 3),(1, 2000, 3), (1, 0, 3),(1, 0, 3),(1, 0, 3),(1, 0, 3),(1, 1000, 3),(1, 2000, 3),(1, 2000, 3))
@@ -17,7 +17,7 @@ class Test_ChangeProfile_False_url():
                 "platforms": ["MT5_MARKET_REAL"]
             }
         }
-        return Connection().Change_Profile_false_url(data)
+        return Connection_To_MT5Profiler().Change_Profile_false_url(data)
 
     def test_false_url_status(self,setup):
         print("Service Response : ", setup)
@@ -39,7 +39,7 @@ class Test_ChangeProfile_WithOut_Body():
     @pytest.fixture(scope='class')
     def setup(self):
         data = {}
-        return Connection().Change_Profile_true_url(data)
+        return Connection_To_MT5Profiler().Change_Profile_true_url(data)
 
     def test_request_without_body_status(self, setup):
         print("Service Response : ", setup)
@@ -63,7 +63,7 @@ class Test_ChangeProfile_WithOut_name():
         data = {
             "tradingProfile": {"platforms": ["MT5_MARKET_REAL"]}
         }
-        return Connection().Change_Profile_true_url(data)
+        return Connection_To_MT5Profiler().Change_Profile_true_url(data)
 
     def test_request_without_name_status(self,setup):
         print("Service Response : ", setup)
@@ -87,7 +87,7 @@ class Test_ChangeProfile_WithOut_platform():
         data = {
             "tradingProfile": {"name": "Crisis_for_autotest"}
         }
-        return Connection().Change_Profile_true_url(data), get_data_from_db()
+        return Connection_To_MT5Profiler().Change_Profile_true_url(data), Connection_To_DB().get_data_from_db()
 
     def test_request_without_platform_status(self, setup):
         print("Service Response : ", setup)
@@ -128,7 +128,7 @@ class Test_No_Value_for_Name():
                 "platforms": ["MT5_INSTANT_REAL"]
             }
         }
-        return Connection().Change_Profile_true_url(data)
+        return Connection_To_MT5Profiler().Change_Profile_true_url(data)
 
     def test_request_without_value_for_name_status(self,setup):
         print("Service Response : ", setup)
@@ -155,7 +155,7 @@ class Test_Value_To_Name_Not_Str():
                 "platforms": ["MT5_INSTANT_REAL"]
             }
         }
-        return Connection().Change_Profile_true_url(data)
+        return Connection_To_MT5Profiler().Change_Profile_true_url(data)
 
     def test_request_value_to_name_not_str_status(self, setup):
         print("Service Response : ", setup)
@@ -182,7 +182,7 @@ class Test_Correct_Value_To_Name():
                 "platforms": ["MT5_MARKET_REAL", "MT5_INSTANT_REAL"]
             }
         }
-        return Connection().Change_Profile_true_url(data), get_data_from_db()
+        return Connection_To_MT5Profiler().Change_Profile_true_url(data), Connection_To_DB().get_data_from_db()
 
     def test_request_correct_value_to_name_status(self, setup):
         print("Service Response : ", setup[0])
@@ -223,7 +223,7 @@ class Test_Not_Found_Profile_For_Name_Value():
                 "platforms": ["MT5_MARKET_REAL", "MT5_INSTANT_REAL"]
             }
         }
-        return Connection().Change_Profile_true_url(data)
+        return Connection_To_MT5Profiler().Change_Profile_true_url(data)
 
     def test_request_not_found_profile_for_name_value_status(self, setup):
         print("Service Response : ", setup)
@@ -250,7 +250,7 @@ class Test_No_Value_To_Platforms():
                 "platforms": []
             }
         }
-        return Connection().Change_Profile_true_url(data), get_data_from_db()
+        return Connection_To_MT5Profiler().Change_Profile_true_url(data), Connection_To_DB().get_data_from_db()
 
     def test_request_no_value_to_platforms_status(self, setup):
         print("Service Response : ", setup[0])
@@ -291,7 +291,7 @@ class Test_Value_To_Platforms_Not_Str():
                 "platforms": [123456]
             }
         }
-        return Connection().Change_Profile_true_url(data)
+        return Connection_To_MT5Profiler().Change_Profile_true_url(data)
 
     def test_request_value_to_platforms_not_str_status(self, setup):
         print("Service Response : ", setup)
@@ -318,7 +318,7 @@ class Test_Correct_Value_To_Platforms_One_Server():
                 "platforms": ["MT5_MARKET_REAL"]
             }
         }
-        return Connection().Change_Profile_true_url(data), get_data_from_db()
+        return Connection_To_MT5Profiler().Change_Profile_true_url(data), Connection_To_DB().get_data_from_db()
 
     def test_request_correct_value_to_platforms_one_server_status(self, setup):
         print("Service Response : ", setup[0])
@@ -358,7 +358,7 @@ class Test_Correct_Value_To_Platforms_Two_Servers():
                 "platforms": ["MT5_MARKET_REAL", "MT5_INSTANT_REAL"]
             }
         }
-        return Connection().Change_Profile_true_url(data), get_data_from_db()
+        return Connection_To_MT5Profiler().Change_Profile_true_url(data), Connection_To_DB().get_data_from_db()
 
     def test_request_correct_value_to_platforms_two_servers_status(self, setup):
         print("Service Response : ", setup[0])
@@ -399,7 +399,7 @@ class Test_Value_To_Platforms_Two_Servers_One_Not_In_Config():
                 "platforms": ["MT5_MARKET_REAL", "MT5_FOR_TEST"]
             }
         }
-        return Connection().Change_Profile_true_url(data), get_data_from_db()
+        return Connection_To_MT5Profiler().Change_Profile_true_url(data), Connection_To_DB().get_data_from_db()
 
     def test_request_value_to_platforms_two_servers_one_not_in_config_status(self, setup):
         print("Service Response : ", setup[0])
@@ -441,7 +441,7 @@ class Test_Not_Found_Platform_In_Profile():
                 "platforms": ["MT5_TEST"]
                 }
             }
-        return Connection().Change_Profile_true_url(data)
+        return Connection_To_MT5Profiler().Change_Profile_true_url(data)
 
     def test_request_not_found_platform_in_profile_status(self, setup):
         print("Service Response : ", setup)
@@ -481,7 +481,7 @@ class Test_response_code():
                         "platforms": ["MT5_TEST"]
                     }
             }
-            return Connection().Change_Profile_true_url(data)
+            return Connection_To_MT5Profiler().Change_Profile_true_url(data)
 
         def test_request_not_found_platform_in_profile_status(self, setup):
             print("Service Response : ", setup)
@@ -516,7 +516,7 @@ class Test_response_code():
                     "platforms": ["MT5_MARKET_REAL"]
                 }
             }
-            return Connection().Change_Profile_false_url(data)
+            return Connection_To_MT5Profiler().Change_Profile_false_url(data)
 
         def test_false_url_status(self, setup):
             print("Service Response : ", setup)
@@ -540,7 +540,7 @@ class Test_response_code():
             data = {
                 "tradingProfile": {"platforms": ["MT5_MARKET_REAL"]}
             }
-            return Connection().Change_Profile_true_url(data)
+            return Connection_To_MT5Profiler().Change_Profile_true_url(data)
 
         def test_request_without_name_status(self, setup):
             print("Service Response : ", setup)
@@ -567,7 +567,7 @@ class Test_response_code():
                     "platforms": ["MT5_INSTANT_REAL"]
                 }
             }
-            return Connection().Change_Profile_true_url(data)
+            return Connection_To_MT5Profiler().Change_Profile_true_url(data)
 
         def test_request_value_to_name_not_str_status(self, setup):
             print("Service Response : ", setup)
@@ -594,7 +594,7 @@ class Test_response_code():
                     "platforms": ["MT5_TEST"]
                 }
             }
-            return Connection().Change_Profile_true_url(data)
+            return Connection_To_MT5Profiler().Change_Profile_true_url(data)
 
         def test_request_no_connection_with_server_status(self, setup):
             print("Service Response : ", setup)
@@ -629,7 +629,7 @@ class Test_No_Valid_Json_1():
     @pytest.fixture(scope='class')
     def setup(self):
         data = '{"tradingProfile":{"name":"Default_for_autotest","platforms":["MT5_MARKET_REAL"]}}'
-        return Connection().Change_Profile_true_url(data)
+        return Connection_To_MT5Profiler().Change_Profile_true_url(data)
 
     def test_request_no_valid_json_1_status(self, setup):
         print("Service Response : ", setup)
@@ -651,7 +651,7 @@ class Test_No_Valid_Json_1():
         @pytest.fixture(scope='class')
         def setup(self):
             data = "{\"tradingProfile:{\"name\":\"Default_for_autotest\",\"platforms\":[\"MT5_MARKET_REAL\"]}}"
-            return Connection().Change_Profile_wrong_json(data)
+            return Connection_To_MT5Profiler().Change_Profile_wrong_json(data)
 
         def test_request_no_valid_json_2_status(self, setup):
             print("Service Response : ", setup)
@@ -678,7 +678,7 @@ class Test_Crisis_Mode_For_AutoTest():
                 "platforms": ["MT5_MARKET_REAL", "MT5_INSTANT_REAL"]
             }
         }
-        return Connection().Change_Profile_true_url(data), get_data_from_db()
+        return Connection_To_MT5Profiler().Change_Profile_true_url(data), Connection_To_DB().get_data_from_db()
 
     def test_request_crisis_mode_for_autotest_status(self, setup):
         print("Service Response : ", setup[0])
@@ -718,7 +718,7 @@ class Test_Default_Mode_For_AutoTest():
                 "platforms": ["MT5_MARKET_REAL", "MT5_INSTANT_REAL"]
             }
         }
-        return Connection().Change_Profile_true_url(data), get_data_from_db()
+        return Connection_To_MT5Profiler().Change_Profile_true_url(data), Connection_To_DB().get_data_from_db()
 
     def test_request_default_mode_for_autotest_status(self, setup):
         print("Service Response : ", setup[0])
@@ -759,7 +759,7 @@ class Test_Default_Mode():
                 "platforms": ["MT5_MARKET_REAL", "MT5_INSTANT_REAL"]
             }
         }
-        return Connection().Change_Profile_true_url(data), get_data_from_db()
+        return Connection_To_MT5Profiler().Change_Profile_true_url(data), Connection_To_DB().get_data_from_db()
 
     def test_request_default_mode_status(self, setup):
         print("Service Response : ", setup[0])

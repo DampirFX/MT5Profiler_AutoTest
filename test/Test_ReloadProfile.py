@@ -1,11 +1,11 @@
 import pytest
-from src.ConnectorMT5Profiler import Connection
+from src.ConnectorMT5Profiler import Connection_To_MT5Profiler
 
 
 class Test_ReloadProfiles_True_Url():
     @pytest.fixture(scope='class')
     def setup(self):
-        return Connection().ReloadProfile_true_url()
+        return Connection_To_MT5Profiler().ReloadProfile_true_url()
 
     def test_true_reload_status(self,setup):
         print("Service Response : ", setup)
@@ -26,7 +26,7 @@ class Test_ReloadProfiles_True_Url():
 class Test_ReloadProfiles_False_Url():
     @pytest.fixture(scope='class')
     def setup(self):
-        return Connection().ReloadProfile_false_url()
+        return Connection_To_MT5Profiler().ReloadProfile_false_url()
 
     def test_false_reload_status(self,setup):
         print("Service Response : ", setup)

@@ -1,2 +1,3 @@
-from .ConnectorMT5Profiler import Connection
-from .DB_Connector import  get_data_from_db
+from .ConnectorMT5Profiler import Connection_To_MT5Profiler
+from .DB_Connector import  Connection_To_DB
+from .mt5_web_api_connector import MT5Connector
