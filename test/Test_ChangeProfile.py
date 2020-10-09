@@ -3,10 +3,14 @@ from src.ConnectorMT5Profiler import Connection_To_MT5Profiler
 from src.DB_Connector import Connection_To_DB
 
 
-default_list = ((1, 0, 3), (1, 0, 3), (1, 0, 3),(1, 0, 3),(1, 1000, 3),(1, 2000, 3),(1, 2000, 3), (1, 0, 3),(1, 0, 3),(1, 0, 3),(1, 0, 3),(1, 1000, 3),(1, 2000, 3),(1, 2000, 3))
-crisis_list = ((0, 1000, 3), (1, 1000, 3), (1, 1000, 3), (1, 1000, 3), (1, 2000, 3), (1, 4000, 3), (1, 4000, 3), (0, 1000, 3), (1, 1000, 3), (1, 1000, 3), (1, 1000, 3), (1, 2000, 3), (1, 4000, 3), (1, 4000, 3))
-for_autotest_list = ((1, 3000, 3), (1, 3000, 3), (1, 3000, 3), (1, 3000, 3), (1, 3000, 3), (1, 5000, 3), (1, 5000, 3), (1, 3000, 3), (1, 3000, 3), (1, 3000, 3), (1, 3000, 3), (1, 3000, 3), (1, 5000, 3), (1, 5000, 3))
-
+default_list_market = ((1, 0, 3), (1, 0, 3), (1, 0, 3), (1, 0, 3), (1, 1000, 3), (1, 2000, 3), (1, 2000, 3))
+default_list_instant = ((1, 0, 3), (1, 0, 3), (1, 0, 3), (1, 0, 3), (1, 1000, 3), (1, 2000, 3), (1, 2000, 3))
+default_list_market_for_autotest = ((1, 0, 3), (1, 0, 3), (1, 0, 3), (1, 0, 3), (1, 1000, 3), (1, 2000, 3), (1, 2000, 3))
+default_list_instant_for_autotest = ((1, 0, 3), (1, 0, 3), (1, 0, 3), (1, 0, 3), (1, 1000, 3), (1, 2000, 3), (1, 2000, 3))
+crisis_list_market_for_autotest = ((0, 1000, 3), (1, 1000, 3), (1, 1000, 3), (1, 1000, 3), (1, 2000, 3), (1, 4000, 3), (1, 4000, 3))
+crisis_list_instant_for_autotest = ((1, 1000, 3), (1, 1000, 3), (1, 1000, 3), (1, 1000, 3), (1, 2000, 3), (1, 4000, 3), (1, 4000, 3))
+for_autotest_market_list = ((1, 3000, 3), (1, 3000, 3), (1, 3000, 3), (1, 3000, 3), (1, 3000, 3), (1, 5000, 3), (1, 5000, 3))
+for_autotest_instant_list = ((1, 4000, 3), (1, 4000, 3), (1, 4000, 3), (1, 4000, 3), (1, 5000, 3), (1, 3000, 3), (1, 3000, 3))
 
 class Test_ChangeProfile_False_url():
     @pytest.fixture(scope='class')
@@ -87,7 +91,7 @@ class Test_ChangeProfile_WithOut_platform():
         data = {
             "tradingProfile": {"name": "Crisis_for_autotest"}
         }
-        return Connection_To_MT5Profiler().Change_Profile_true_url(data), Connection_To_DB().get_data_from_db()
+        return Connection_To_MT5Profiler().Change_Profile_true_url(data), Connection_To_DB().get_data_for_market_from_db(),Connection_To_DB().get_data_for_instant_from_db()
 
     def test_request_without_platform_status(self, setup):
         print("Service Response : ", setup)
@@ -111,7 +115,8 @@ class Test_ChangeProfile_WithOut_platform():
 
     def test_request_without_platform_check_data_in_db(self, setup):
         print("Service Response : ", setup)
-        assert setup[1] == crisis_list
+        assert setup[1] == crisis_list_market_for_autotest
+        assert setup[2] == crisis_list_instant_for_autotest
 
     def test_request_without_platform_result_value(self,setup):
         print("Service Response : ", setup)
@@ -182,7 +187,7 @@ class Test_Correct_Value_To_Name():
                 "platforms": ["MT5_MARKET_REAL", "MT5_INSTANT_REAL"]
             }
         }
-        return Connection_To_MT5Profiler().Change_Profile_true_url(data), Connection_To_DB().get_data_from_db()
+        return Connection_To_MT5Profiler().Change_Profile_true_url(data), Connection_To_DB().get_data_for_market_from_db(),Connection_To_DB().get_data_for_instant_from_db()
 
     def test_request_correct_value_to_name_status(self, setup):
         print("Service Response : ", setup[0])
@@ -206,7 +211,8 @@ class Test_Correct_Value_To_Name():
 
     def test_request_correct_value_to_name_check_data_in_db(self, setup):
         print("Service Response : ", setup[1])
-        assert setup[1] == default_list
+        assert setup[1] == default_list_market_for_autotest
+        assert setup[2] == default_list_instant_for_autotest
 
     def test_request_correct_value_to_name_result_value(self, setup):
         print("Service Response : ", setup[0]["Result"])
@@ -250,7 +256,7 @@ class Test_No_Value_To_Platforms():
                 "platforms": []
             }
         }
-        return Connection_To_MT5Profiler().Change_Profile_true_url(data), Connection_To_DB().get_data_from_db()
+        return Connection_To_MT5Profiler().Change_Profile_true_url(data), Connection_To_DB().get_data_for_market_from_db(),Connection_To_DB().get_data_for_instant_from_db()
 
     def test_request_no_value_to_platforms_status(self, setup):
         print("Service Response : ", setup[0])
@@ -274,7 +280,8 @@ class Test_No_Value_To_Platforms():
 
     def test_request_no_value_to_platforms_check_data_in_db(self, setup):
         print("Service Response : ", setup[1])
-        assert setup[1] == crisis_list
+        assert setup[1] == crisis_list_market_for_autotest
+        assert setup[2] == crisis_list_instant_for_autotest
 
     def test_request_no_value_to_platforms_result_value(self, setup):
         print("Service Response : ", setup[0]["Result"])
@@ -318,7 +325,7 @@ class Test_Correct_Value_To_Platforms_One_Server():
                 "platforms": ["MT5_MARKET_REAL"]
             }
         }
-        return Connection_To_MT5Profiler().Change_Profile_true_url(data), Connection_To_DB().get_data_from_db()
+        return Connection_To_MT5Profiler().Change_Profile_true_url(data), Connection_To_DB().get_data_for_market_from_db()
 
     def test_request_correct_value_to_platforms_one_server_status(self, setup):
         print("Service Response : ", setup[0])
@@ -342,7 +349,7 @@ class Test_Correct_Value_To_Platforms_One_Server():
 
     def test_request_correct_value_to_platforms_one_server_check_data_in_db(self, setup):
         print("Service Response : ", setup[1])
-        assert setup[1] == default_list
+        assert setup[1] == default_list_market_for_autotest
 
     def test_request_correct_value_to_platforms_one_server_result_value(self, setup):
         print("Service Response : ", setup[0]["Result"])
@@ -358,7 +365,7 @@ class Test_Correct_Value_To_Platforms_Two_Servers():
                 "platforms": ["MT5_MARKET_REAL", "MT5_INSTANT_REAL"]
             }
         }
-        return Connection_To_MT5Profiler().Change_Profile_true_url(data), Connection_To_DB().get_data_from_db()
+        return Connection_To_MT5Profiler().Change_Profile_true_url(data), Connection_To_DB().get_data_for_market_from_db(),Connection_To_DB().get_data_for_instant_from_db()
 
     def test_request_correct_value_to_platforms_two_servers_status(self, setup):
         print("Service Response : ", setup[0])
@@ -382,7 +389,8 @@ class Test_Correct_Value_To_Platforms_Two_Servers():
 
     def test_request_correct_value_to_platforms_two_servers_check_data_in_db(self, setup):
         print("Service Response : ", setup[1])
-        assert setup[1] == default_list
+        assert setup[1] == default_list_market_for_autotest
+        assert setup[2] == default_list_instant_for_autotest
 
     def test_request_correct_value_to_platforms_two_servers_result_value(self, setup):
         print("Service Response : ", setup[0]["Result"])
@@ -390,16 +398,16 @@ class Test_Correct_Value_To_Platforms_Two_Servers():
                                       {'description': 'Done', 'platform': 'MT5_INSTANT_REAL', 'status': 0}]
 
 
-class Test_Value_To_Platforms_Two_Servers_One_Not_In_Config():
+class Test_Value_To_Platforms_some_Servers_One_Not_In_Config():
     @pytest.fixture(scope='class')
     def setup(self):
         data = {
             "tradingProfile": {
                 "name": "For_AutoTest",
-                "platforms": ["MT5_MARKET_REAL", "MT5_FOR_TEST"]
+                "platforms": ["MT5_MARKET_REAL","MT5_INSTANT_REAL", "MT5_FOR_TEST"]
             }
         }
-        return Connection_To_MT5Profiler().Change_Profile_true_url(data), Connection_To_DB().get_data_from_db()
+        return Connection_To_MT5Profiler().Change_Profile_true_url(data), Connection_To_DB().get_data_for_market_from_db(),Connection_To_DB().get_data_for_instant_from_db()
 
     def test_request_value_to_platforms_two_servers_one_not_in_config_status(self, setup):
         print("Service Response : ", setup[0])
@@ -423,13 +431,49 @@ class Test_Value_To_Platforms_Two_Servers_One_Not_In_Config():
 
     def test_request_value_to_platforms_two_servers_one_not_in_config_check_data_in_db(self, setup):
         print("Service Response : ", setup[1])
-        assert setup[1] == for_autotest_list
+        assert setup[1] == for_autotest_market_list
+        assert setup[2] == for_autotest_instant_list
 
     def test_request_value_to_platforms_two_servers_one_not_in_config_result_value(self, setup):
         print("Service Response : ", setup[0]["Result"])
         assert setup[0]["Result"] == [{'description': 'Done', 'platform': 'MT5_MARKET_REAL', 'status': 0},
-                                        {'description': 'No information in config', 'platform': 'MT5_FOR_TEST', 'status': 2}]
+                                      {'description': 'Done', 'platform': 'MT5_INSTANT_REAL', 'status': 0},
+                                      {'description': 'No information in config',  'platform': 'MT5_FOR_TEST', 'status': 2}]
 
+class Test_Wrong_Route_Name():
+    @pytest.fixture(scope='class')
+    def setup(self):
+        data = {
+            "tradingProfile": {
+                "name": "For_AutoTest_Wrong_Route_Name",
+                "platforms": ["MT5_MARKET_REAL"]
+            }
+        }
+        return Connection_To_MT5Profiler().Change_Profile_true_url(data)
+
+    def test_wrong_route_name_status(self, setup):
+        print("Service Response : ", setup)
+        assert "status" in setup.keys()
+
+    def test_wrong_route_name_status_code(self, setup):
+        print("Service Response : ", setup)
+        assert setup["status"] == 7
+
+    def test_wrong_route_name_description(self, setup):
+        print("Service Response : ", setup)
+        assert "description" in setup.keys()
+
+    def test_wrong_route_name_description_value(self, setup):
+        print("Service Response : ", setup)
+        assert setup["description"] == 'One or more updates are failed'
+
+    def test_wrong_route_name_result(self, setup):
+        print("Service Response : ", setup)
+        assert "Result" in setup.keys()
+
+    def test_wrong_route_name_result_value(self, setup):
+        print("Service Response : ", setup["Result"])
+        assert setup["Result"] == [{'description': "IMTAdminAPI::RouteGet('Experts Timeout Market Test', route) failed, error(MTAPIRES): 13('Not found')", 'platform': 'MT5_MARKET_REAL', 'status': 1}]
 
 class Test_Not_Found_Platform_In_Profile():
     @pytest.fixture(scope='class')
@@ -678,7 +722,7 @@ class Test_Crisis_Mode_For_AutoTest():
                 "platforms": ["MT5_MARKET_REAL", "MT5_INSTANT_REAL"]
             }
         }
-        return Connection_To_MT5Profiler().Change_Profile_true_url(data), Connection_To_DB().get_data_from_db()
+        return Connection_To_MT5Profiler().Change_Profile_true_url(data), Connection_To_DB().get_data_for_market_from_db(), Connection_To_DB().get_data_for_instant_from_db()
 
     def test_request_crisis_mode_for_autotest_status(self, setup):
         print("Service Response : ", setup[0])
@@ -702,7 +746,8 @@ class Test_Crisis_Mode_For_AutoTest():
 
     def test_request_crisis_mode_for_autotest_check_data_in_db(self, setup):
         print("Service Response : ", setup[1])
-        assert setup[1] == crisis_list
+        assert setup[1] == crisis_list_market_for_autotest
+        assert setup[2] == crisis_list_instant_for_autotest
 
     def test_request_crisis_mode_for_autotest_result_value(self, setup):
         print("Service Response : ", setup[0]["Result"])
@@ -718,7 +763,7 @@ class Test_Default_Mode_For_AutoTest():
                 "platforms": ["MT5_MARKET_REAL", "MT5_INSTANT_REAL"]
             }
         }
-        return Connection_To_MT5Profiler().Change_Profile_true_url(data), Connection_To_DB().get_data_from_db()
+        return Connection_To_MT5Profiler().Change_Profile_true_url(data), Connection_To_DB().get_data_for_market_from_db(), Connection_To_DB().get_data_for_instant_from_db()
 
     def test_request_default_mode_for_autotest_status(self, setup):
         print("Service Response : ", setup[0])
@@ -742,7 +787,8 @@ class Test_Default_Mode_For_AutoTest():
 
     def test_request_default_mode_for_autotest_check_data_in_db(self, setup):
         print("Service Response : ", setup[1])
-        assert setup[1] == default_list
+        assert setup[1] == default_list_market_for_autotest
+        assert setup[2] == default_list_instant_for_autotest
 
     def test_request_default_mode_for_autotest_result_value(self, setup):
         print("Service Response : ", setup[0]["Result"])
@@ -759,7 +805,7 @@ class Test_Default_Mode():
                 "platforms": ["MT5_MARKET_REAL", "MT5_INSTANT_REAL"]
             }
         }
-        return Connection_To_MT5Profiler().Change_Profile_true_url(data), Connection_To_DB().get_data_from_db()
+        return Connection_To_MT5Profiler().Change_Profile_true_url(data), Connection_To_DB().get_data_for_market_from_db(), Connection_To_DB().get_data_for_instant_from_db()
 
     def test_request_default_mode_status(self, setup):
         print("Service Response : ", setup[0])
@@ -783,7 +829,8 @@ class Test_Default_Mode():
 
     def test_request_default_mode_check_data_in_db(self, setup):
         print("Service Response : ", setup[1])
-        assert setup[1] == default_list
+        assert setup[1] == default_list_market
+        assert setup[2] == default_list_instant
 
     def test_request_default_mode_result_value(self, setup):
         print("Service Response : ", setup[0]["Result"])

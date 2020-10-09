@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<profile name="For_AutoTest_Wrong_Route_Name">  
+    <platform name="MT5_MARKET_REAL">
+        <routes>
+		<route name="Experts Timeout Market Test" param="5000"/>
+        </routes>
+    </platform>   
+</profile>  
