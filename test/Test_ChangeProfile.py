@@ -94,32 +94,32 @@ class Test_ChangeProfile_WithOut_platform():
         return Connection_To_MT5Profiler().Change_Profile_true_url(data), Connection_To_DB().get_data_for_market_from_db(),Connection_To_DB().get_data_for_instant_from_db()
 
     def test_request_without_platform_status(self, setup):
-        print("Service Response : ", setup)
+        print("Service Response : ", setup[0])
         assert "status" in setup[0].keys()
 
     def test_request_without_platform_status_code(self, setup):
-        print("Service Response : ", setup)
+        print("Service Response : ", setup[0])
         assert setup[0]["status"] == 0
 
     def test_request_without_platform_description(self, setup):
-        print("Service Response : ", setup)
+        print("Service Response : ", setup[0])
         assert "description" in setup[0].keys()
 
     def test_request_without_platform_description_value(self, setup):
-        print("Service Response : ", setup)
+        print("Service Response : ", setup[0])
         assert setup[0]["description"] == 'Done'
 
     def test_request_without_platform_result(self, setup):
-        print("Service Response : ", setup)
+        print("Service Response : ", setup[0])
         assert "Result" in setup[0].keys()
 
     def test_request_without_platform_check_data_in_db(self, setup):
-        print("Service Response : ", setup)
+        print("Service Response : ", setup[1],setup[2])
         assert setup[1] == crisis_list_market_for_autotest
         assert setup[2] == crisis_list_instant_for_autotest
 
     def test_request_without_platform_result_value(self,setup):
-        print("Service Response : ", setup)
+        print("Service Response : ", setup[0])
         assert setup[0]["Result"] == [{'description': 'Done', 'platform': 'MT5_MARKET_REAL', 'status': 0},
                                     {'description': 'Done', 'platform': 'MT5_INSTANT_REAL', 'status': 0}]
 
@@ -210,7 +210,7 @@ class Test_Correct_Value_To_Name():
         assert "Result" in setup[0].keys()
 
     def test_request_correct_value_to_name_check_data_in_db(self, setup):
-        print("Service Response : ", setup[1])
+        print("Service Response : ", setup[1],setup[2])
         assert setup[1] == default_list_market_for_autotest
         assert setup[2] == default_list_instant_for_autotest
 
@@ -279,7 +279,7 @@ class Test_No_Value_To_Platforms():
         assert "Result" in setup[0].keys()
 
     def test_request_no_value_to_platforms_check_data_in_db(self, setup):
-        print("Service Response : ", setup[1])
+        print("Service Response : ", setup[1],setup[2])
         assert setup[1] == crisis_list_market_for_autotest
         assert setup[2] == crisis_list_instant_for_autotest
 
@@ -388,7 +388,7 @@ class Test_Correct_Value_To_Platforms_Two_Servers():
         assert "Result" in setup[0].keys()
 
     def test_request_correct_value_to_platforms_two_servers_check_data_in_db(self, setup):
-        print("Service Response : ", setup[1])
+        print("Service Response : ", setup[1],setup[2])
         assert setup[1] == default_list_market_for_autotest
         assert setup[2] == default_list_instant_for_autotest
 
@@ -430,7 +430,7 @@ class Test_Value_To_Platforms_some_Servers_One_Not_In_Config():
         assert "Result" in setup[0].keys()
 
     def test_request_value_to_platforms_two_servers_one_not_in_config_check_data_in_db(self, setup):
-        print("Service Response : ", setup[1])
+        print("Service Response : ", setup[1],setup[2])
         assert setup[1] == for_autotest_market_list
         assert setup[2] == for_autotest_instant_list
 
@@ -745,7 +745,7 @@ class Test_Crisis_Mode_For_AutoTest():
         assert "Result" in setup[0].keys()
 
     def test_request_crisis_mode_for_autotest_check_data_in_db(self, setup):
-        print("Service Response : ", setup[1])
+        print("Service Response : ", setup[1],setup[2])
         assert setup[1] == crisis_list_market_for_autotest
         assert setup[2] == crisis_list_instant_for_autotest
 
@@ -786,7 +786,7 @@ class Test_Default_Mode_For_AutoTest():
         assert "Result" in setup[0].keys()
 
     def test_request_default_mode_for_autotest_check_data_in_db(self, setup):
-        print("Service Response : ", setup[1])
+        print("Service Response : ", setup[1],setup[2])
         assert setup[1] == default_list_market_for_autotest
         assert setup[2] == default_list_instant_for_autotest
 
@@ -828,7 +828,7 @@ class Test_Default_Mode():
         assert "Result" in setup[0].keys()
 
     def test_request_default_mode_check_data_in_db(self, setup):
-        print("Service Response : ", setup[1])
+        print("Service Response : ", setup[1],setup[2])
         assert setup[1] == default_list_market
         assert setup[2] == default_list_instant
 

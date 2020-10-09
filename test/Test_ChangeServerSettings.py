@@ -257,17 +257,23 @@ class Test_ChangeServerSettings_Platform_No_In_Request():
 
     def test_changeserversettings_platform_no_in_request_result_value(self,setup):
         print("Service Response : ", setup)
-        assert setup["result"] == [{'description': 'Done', 'platform': 'MT5_DEMO', 'status': 0},
+        assert (setup["result"] == [{'description': 'Done', 'platform': 'MT5_DEMO', 'status': 0},
                                    {'description': 'Done', 'platform': 'MT5_INSTANT_DEMO', 'status': 0},
                                    {'description': 'Done', 'platform': 'MT5_INSTANT_REAL', 'status': 0},
                                    {'description': 'Done', 'platform': 'MT5_MARKET_DEMO', 'status': 0},
                                    {'description': 'Done', 'platform': 'MT5_MARKET_REAL', 'status': 0},
                                    {'description': 'Done', 'platform': 'MT5_REAL', 'status': 0}]
+            or
+
+            setup["result"] == [{'description': 'Done', 'platform': 'MT5_INSTANT_REAL', 'status': 0},
+                                {'description': 'Done', 'platform': 'MT5_MARKET_REAL', 'status': 0},
+                                {'description': 'Done', 'platform': 'MT5_REAL', 'status': 0}])
+
 
 class Test_ChangeServerSettings_Two_Platform_In_Request():
     @pytest.fixture(scope='class')
     def setup(self):
-        data = {"platforms":["MT5_REAL","MT5_DEMO"],"symbols": [{"symbol": "EURUSD","tradeMode": "TRADE_FULL"}]}
+        data = {"platforms":["MT5_REAL","MT5_MARKET_REAL"],"symbols": [{"symbol": "EURUSD","tradeMode": "TRADE_FULL"}]}
         return Connection_To_MT5Profiler().Change_Server_Settings(data)
 
     def test_changeserversettings_two_platform_in_request_status(self,setup):
@@ -292,7 +298,7 @@ class Test_ChangeServerSettings_Two_Platform_In_Request():
 
     def test_changeserversettings_two_platform_in_request_result_value(self,setup):
         print("Service Response : ", setup)
-        assert setup["result"] == [{'description': 'Done', 'platform': 'MT5_DEMO', 'status': 0},
+        assert setup["result"] == [{'description': 'Done', 'platform': 'MT5_MARKET_REAL', 'status': 0},
                                    {'description': 'Done', 'platform': 'MT5_REAL', 'status': 0}]
 
 class Test_ChangeServerSettings_Two_Platform_In_Request_One_Not_In_Setting():
@@ -614,9 +620,14 @@ class Test_ChangeServerSettings_Empty_Body():
 
     def test_changeserversettings_empty_body_result_value(self,setup):
         print("Service Response : ", setup)
-        assert setup["result"] == [{'description': 'Done', 'platform': 'MT5_DEMO', 'status': 0},
+        assert (setup["result"] == [{'description': 'Done', 'platform': 'MT5_DEMO', 'status': 0},
                                    {'description': 'Done', 'platform': 'MT5_INSTANT_DEMO', 'status': 0},
                                    {'description': 'Done', 'platform': 'MT5_INSTANT_REAL', 'status': 0},
                                    {'description': 'Done', 'platform': 'MT5_MARKET_DEMO', 'status': 0},
                                    {'description': 'Done', 'platform': 'MT5_MARKET_REAL', 'status': 0},
                                    {'description': 'Done', 'platform': 'MT5_REAL', 'status': 0}]
+            or
+
+            setup["result"] == [{'description': 'Done', 'platform': 'MT5_INSTANT_REAL', 'status': 0},
+                                {'description': 'Done', 'platform': 'MT5_MARKET_REAL', 'status': 0},
+                                {'description': 'Done', 'platform': 'MT5_REAL', 'status': 0}])

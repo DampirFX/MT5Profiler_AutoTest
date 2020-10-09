@@ -2,13 +2,6 @@ import pymysql
 import time
 import json
 
-# IP = 'rds.mt.qa-env.com'
-# PORT = 3306
-# LOGIN = 'tester'
-# PASSWORD = '1q2w3e4r'
-# REPEAT_INTERVAL = 100
-# MAX_TIMEOUT = 10000
-
 class Connection_To_DB(object):
     def __init__(self):
         with open('src/credentials.json', "r") as read_file:
