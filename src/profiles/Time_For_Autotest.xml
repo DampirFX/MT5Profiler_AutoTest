@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<profile name="Time_For_Autotest">
+    <platform name="MT5_REAL">
+		<symbols>
+			<symbol name="AUDUSD">
+				<sessions use-time-limits="1" from="2017.01.01 00:00" to="2037.01.01 00:00">
+					<quotes>
+						<session day="0" time=""/>
+						<session day="1" time="00:00-24:00"/>
+						<session day="2" time="00:00-24:00"/>
+						<session day="3" time="00:00-24:00"/>
+						<session day="4" time="00:00-24:00"/>
+						<session day="5" time="00:00-23:59"/>
+						<session day="6" time=""/>
+					</quotes>
+					<trade>
+						<session day="0" time=""/>
+						<session day="1" time="00:00-24:00"/>
+						<session day="2" time="00:00-24:00"/>
+						<session day="3" time="00:00-24:00"/>
+						<session day="4" time="00:00-24:00"/>
+						<session day="5" time="00:00-23:59"/>
+						<session day="6" time=""/>
+					</trade>
+				</sessions>
+			</symbol>			
+			<symbol name="EURUSD">
+				<sessions use-time-limits="0">
+					<quotes>
+						<session day="0" time=""/>
+						<session day="1" time="01:00-04:00"/>
+						<session day="2" time="02:00-07:30"/>
+						<session day="3" time="05:00-24:00"/>
+						<session day="4" time="10:00-22:00"/>
+						<session day="5" time="20:00-21:59"/>
+						<session day="6" time=""/>
+					</quotes>
+					<trade>
+						<session day="0" time=""/>
+						<session day="1" time="01:10-03:40"/>
+						<session day="2" time="02:30-07:29"/>
+						<session day="3" time="05:05-14:35"/>
+						<session day="4" time="17:00-21:59"/>
+						<session day="5" time="20:00-21:59"/>
+						<session day="6" time=""/>
+					</trade>
+				</sessions>
+			</symbol>
+			<symbol name="AUDCAD">
+				<sessions use-time-limits="0">
+					<trade>
+						<session day="0" time=""/>
+						<session day="1" time="11:00-24:00"/>
+						<session day="2" time="11:00-24:00"/>
+						<session day="3" time="11:00-24:00"/>
+						<session day="4" time="11:00-24:00"/>
+						<session day="5" time="11:00-23:59"/>
+						<session day="6" time=""/>
+					</trade>
+				</sessions>
+			</symbol>			
+			<symbol name="GBPUSD">
+				<sessions use-time-limits="0">
+					<quotes>
+						<session day="0" time=""/>
+						<session day="1" time="11:00-24:00"/>
+						<session day="2" time="11:00-24:00"/>
+						<session day="3" time="11:00-24:00"/>
+						<session day="4" time="11:00-24:00"/>
+						<session day="5" time="11:00-23:59"/>
+						<session day="6" time=""/>
+					</quotes>					
+				</sessions>
+			</symbol>
+			<symbol name="USDCHF">
+				<sessions use-time-limits="0">
+					<quotes>
+						<session day="0" time=""/>
+						<session day="1" time="01:00-24:00"/>
+						<session day="2" time="01:00-24:00"/>
+						<session day="4" time="01:00-24:00"/>
+						<session day="5" time="01:00-23:59"/>
+						<session day="6" time=""/>
+					</quotes>
+					<trade>
+						<session day="0" time=""/>
+						<session day="1" time="01:00-24:00"/>
+						<session day="2" time="01:00-24:00"/>
+						<session day="4" time="01:00-24:00"/>
+						<session day="5" time="01:00-23:59"/>
+						<session day="6" time=""/>
+					</trade>
+				</sessions>
+			</symbol>
+		</symbols>
+   </platform>
+</profile>

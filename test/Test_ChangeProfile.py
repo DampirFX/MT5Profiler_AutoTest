@@ -1,6 +1,7 @@
 import pytest
 from src.ConnectorMT5Profiler import Connection_To_MT5Profiler
 from src.DB_Connector import Connection_To_DB
+from src.mt5_web_api_connector import MT5Connector
 
 
 default_list_market = ((1, 0, 3), (1, 0, 3), (1, 0, 3), (1, 0, 3), (1, 1000, 3), (1, 2000, 3), (1, 2000, 3))
@@ -836,3 +837,346 @@ class Test_Default_Mode():
         print("Service Response : ", setup[0]["Result"])
         assert setup[0]["Result"] == [{'description': 'Done', 'platform': 'MT5_MARKET_REAL', 'status': 0},
                                       {'description': 'Done', 'platform': 'MT5_INSTANT_REAL', 'status': 0}]
+
+class Test_Change_Time_Session_On_Server():
+    @pytest.fixture(scope='class')
+    def setup(self):
+        data = {
+            "tradingProfile": {
+                "name": "Time_For_Autotest",
+                "platforms": ["MT5_REAL"]
+            }
+        }
+        return Connection_To_MT5Profiler().Change_Profile_true_url(data), MT5Connector().get_symbol_settings("EURUSD")
+
+    def test_change_time_session_on_server_status(self, setup):
+        print("Service Response : ", setup[0])
+        assert "status" in setup[0].keys()
+
+    def test_change_time_session_on_server_status_code(self, setup):
+        print("Service Response : ", setup[0])
+        assert setup[0]["status"] == 0
+
+    def test_change_time_session_on_server_description(self, setup):
+        print("Service Response : ", setup[0])
+        assert "description" in setup[0].keys()
+
+    def test_change_time_session_on_server_description_value(self, setup):
+        print("Service Response : ", setup[0])
+        assert setup[0]["description"] == 'Done'
+
+    def test_change_time_session_on_server_result(self, setup):
+        print("Service Response : ", setup[0])
+        assert "Result" in setup[0].keys()
+
+    def test_change_time_session_on_server_result_value(self, setup):
+        print("Service Response : ", setup[0]["Result"])
+        assert setup[0]["Result"] == [{'description': 'Done', 'platform': 'MT5_REAL', 'status': 0}]
+
+    def test_change_time_session_on_server(self,setup):
+        print("Service Response : ", setup[1])
+        assert  setup[1]["SessionsQuotes"] == [[],
+                                               [{'Close': '240', 'Open': '60'}],
+                                               [{'Close': '450', 'Open': '120'}],
+                                               [{'Close': '1440', 'Open': '300'}],
+                                               [{'Close': '1320', 'Open': '600'}],
+                                               [{'Close': '1319', 'Open': '1200'}],
+                                               []]
+        assert setup[1]["SessionsTrades"] == [[],
+                                              [{'Close': '220', 'Open': '70'}],
+                                              [{'Close': '449', 'Open': '150'}],
+                                              [{'Close': '875', 'Open': '305'}],
+                                              [{'Close': '1319', 'Open': '1020'}],
+                                              [{'Close': '1319', 'Open': '1200'}], []]
+
+class Test_Time_Limit_Session_On_Server():
+    @pytest.fixture(scope='class')
+    def setup(self):
+        data = {
+            "tradingProfile": {
+                "name": "Time_For_Autotest",
+                "platforms": ["MT5_REAL"]
+            }
+        }
+        return Connection_To_MT5Profiler().Change_Profile_true_url(data), MT5Connector().get_symbol_settings("AUDUSD")
+
+    def test_time_limit_session_on_server_status(self, setup):
+        print("Service Response : ", setup[0])
+        assert "status" in setup[0].keys()
+
+    def test_time_limit_session_on_server_status_code(self, setup):
+        print("Service Response : ", setup[0])
+        assert setup[0]["status"] == 0
+
+    def test_time_limit_session_on_server_description(self, setup):
+        print("Service Response : ", setup[0])
+        assert "description" in setup[0].keys()
+
+    def test_time_limit_session_on_server_description_value(self, setup):
+        print("Service Response : ", setup[0])
+        assert setup[0]["description"] == 'Done'
+
+    def test_time_limit_session_on_server_result(self, setup):
+        print("Service Response : ", setup[0])
+        assert "Result" in setup[0].keys()
+
+    def test_time_limit_session_on_server_result_value(self, setup):
+        print("Service Response : ", setup[0]["Result"])
+        assert setup[0]["Result"] == [{'description': 'Done', 'platform': 'MT5_REAL', 'status': 0}]
+
+    def test_time_limit_session_on_server(self,setup):
+        print("Service Response : ", setup[1])
+        assert  setup[1]["TimeStart"] == '1483228800'
+        assert setup[1]["TimeExpiration"] == '2114380800'
+
+class Test_Change_Time_Trade_Session_On_Server():
+    @pytest.fixture(scope='class')
+    def setup(self):
+        data = {
+            "tradingProfile": {
+                "name": "Time_For_Autotest",
+                "platforms": ["MT5_REAL"]
+            }
+        }
+        return Connection_To_MT5Profiler().Change_Profile_true_url(data), MT5Connector().get_symbol_settings("AUDCAD")
+
+    def test_change_time_trade_session_on_server_status(self, setup):
+        print("Service Response : ", setup[0])
+        assert "status" in setup[0].keys()
+
+    def test_change_time_trade_session_on_server_status_code(self, setup):
+        print("Service Response : ", setup[0])
+        assert setup[0]["status"] == 0
+
+    def test_change_time_trade_session_on_server_description(self, setup):
+        print("Service Response : ", setup[0])
+        assert "description" in setup[0].keys()
+
+    def test_change_time_trade_session_on_server_description_value(self, setup):
+        print("Service Response : ", setup[0])
+        assert setup[0]["description"] == 'Done'
+
+    def test_change_time_trade_session_on_server_result(self, setup):
+        print("Service Response : ", setup[0])
+        assert "Result" in setup[0].keys()
+
+    def test_change_time_trade_session_on_server_result_value(self, setup):
+        print("Service Response : ", setup[0]["Result"])
+        assert setup[0]["Result"] == [{'description': 'Done', 'platform': 'MT5_REAL', 'status': 0}]
+
+    def test_change_time_trade_session_on_server(self,setup):
+        print("Service Response : ", setup[1])
+        assert  setup[1]["SessionsQuotes"] == [[],
+                                               [{'Close': '1440', 'Open': '0'}],
+                                               [{'Close': '1440', 'Open': '0'}],
+                                               [{'Close': '1440', 'Open': '0'}],
+                                               [{'Close': '1440', 'Open': '0'}],
+                                               [{'Close': '1439', 'Open': '0'}],
+                                               []]
+        assert setup[1]["SessionsTrades"] == [[],
+                                              [{'Close': '1440', 'Open': '660'}],
+                                              [{'Close': '1440', 'Open': '660'}],
+                                              [{'Close': '1440', 'Open': '660'}],
+                                              [{'Close': '1440', 'Open': '660'}],
+                                              [{'Close': '1439', 'Open': '660'}], []]
+
+class Test_Change_Time_Quote_Session_On_Server():
+    @pytest.fixture(scope='class')
+    def setup(self):
+        data = {
+            "tradingProfile": {
+                "name": "Time_For_Autotest",
+                "platforms": ["MT5_REAL"]
+            }
+        }
+        return Connection_To_MT5Profiler().Change_Profile_true_url(data), MT5Connector().get_symbol_settings("GBPUSD")
+
+    def test_change_time_quote_session_on_server_status(self, setup):
+        print("Service Response : ", setup[0])
+        assert "status" in setup[0].keys()
+
+    def test_change_time_quote_session_on_server_status_code(self, setup):
+        print("Service Response : ", setup[0])
+        assert setup[0]["status"] == 0
+
+    def test_change_time_quote_session_on_server_description(self, setup):
+        print("Service Response : ", setup[0])
+        assert "description" in setup[0].keys()
+
+    def test_change_time_quote_session_on_server_description_value(self, setup):
+        print("Service Response : ", setup[0])
+        assert setup[0]["description"] == 'Done'
+
+    def test_change_time_quote_session_on_server_result(self, setup):
+        print("Service Response : ", setup[0])
+        assert "Result" in setup[0].keys()
+
+    def test_change_time_quote_session_on_server_result_value(self, setup):
+        print("Service Response : ", setup[0]["Result"])
+        assert setup[0]["Result"] == [{'description': 'Done', 'platform': 'MT5_REAL', 'status': 0}]
+
+    def test_change_time_quote_session_on_server(self,setup):
+        print("Service Response : ", setup[1])
+        assert  setup[1]["SessionsQuotes"] == [[],
+                                              [{'Close': '1440', 'Open': '660'}],
+                                              [{'Close': '1440', 'Open': '660'}],
+                                              [{'Close': '1440', 'Open': '660'}],
+                                              [{'Close': '1440', 'Open': '660'}],
+                                              [{'Close': '1439', 'Open': '660'}], []]
+        assert setup[1]["SessionsTrades"] == [[],
+                                              [{'Close': '1440', 'Open': '0'}],
+                                              [{'Close': '1440', 'Open': '0'}],
+                                              [{'Close': '1440', 'Open': '0'}],
+                                              [{'Close': '1440', 'Open': '0'}],
+                                              [{'Close': '1439', 'Open': '0'}], []]
+
+
+class Test_Change_Session_One_Day_Missed_On_Server():
+    @pytest.fixture(scope='class')
+    def setup(self):
+        data = {
+            "tradingProfile": {
+                "name": "Time_For_Autotest",
+                "platforms": ["MT5_REAL"]
+            }
+        }
+        return Connection_To_MT5Profiler().Change_Profile_true_url(data), MT5Connector().get_symbol_settings("USDCHF")
+
+    def test_change_session_one_day_missed_on_server_status(self, setup):
+        print("Service Response : ", setup[0])
+        assert "status" in setup[0].keys()
+
+    def test_change_session_one_day_missed_on_server_status_code(self, setup):
+        print("Service Response : ", setup[0])
+        assert setup[0]["status"] == 0
+
+    def test_change_session_one_day_missed_on_server_description(self, setup):
+        print("Service Response : ", setup[0])
+        assert "description" in setup[0].keys()
+
+    def test_change_session_one_day_missed_on_server_description_value(self, setup):
+        print("Service Response : ", setup[0])
+        assert setup[0]["description"] == 'Done'
+
+    def test_change_session_one_day_missed_on_server_result(self, setup):
+        print("Service Response : ", setup[0])
+        assert "Result" in setup[0].keys()
+
+    def test_change_session_one_day_missed_on_server_result_value(self, setup):
+        print("Service Response : ", setup[0]["Result"])
+        assert setup[0]["Result"] == [{'description': 'Done', 'platform': 'MT5_REAL', 'status': 0}]
+
+    def test_change_session_one_day_missed_on_server(self,setup):
+        print("Service Response : ", setup[1])
+        assert  setup[1]["SessionsQuotes"] == [[],
+                                              [{'Close': '1440', 'Open': '60'}],
+                                              [{'Close': '1440', 'Open': '60'}],
+                                              [{'Close': '1440', 'Open': '0'}],
+                                              [{'Close': '1440', 'Open': '60'}],
+                                              [{'Close': '1439', 'Open': '60'}], []]
+        assert setup[1]["SessionsTrades"] == [[],
+                                              [{'Close': '1440', 'Open': '60'}],
+                                              [{'Close': '1440', 'Open': '60'}],
+                                              [{'Close': '1440', 'Open': '0'}],
+                                              [{'Close': '1440', 'Open': '60'}],
+                                              [{'Close': '1439', 'Open': '60'}], []]
+
+class Test_Change_Session_America_Summer():
+    @pytest.fixture(scope='class')
+    def setup(self):
+        data = {
+            "tradingProfile": {
+                "name": "AmericaSummer",
+                "platforms": ["MT5_REAL"]
+            }
+        }
+        return Connection_To_MT5Profiler().Change_Profile_true_url(data), \
+               MT5Connector().get_symbol_settings("EURUSD"),\
+               MT5Connector().get_symbol_settings("AUDUSD"),\
+               MT5Connector().get_symbol_settings("AUDCAD"),\
+               MT5Connector().get_symbol_settings("GBPUSD"),\
+               MT5Connector().get_symbol_settings("USDCHF")
+
+    def test_change_session_america_summer_status(self, setup):
+        print("Service Response : ", setup[0])
+        assert "status" in setup[0].keys()
+
+    def test_change_session_america_summer_status_code(self, setup):
+        print("Service Response : ", setup[0])
+        assert setup[0]["status"] == 0
+
+    def test_change_session_america_summer_description(self, setup):
+        print("Service Response : ", setup[0])
+        assert "description" in setup[0].keys()
+
+    def test_change_session_america_summer_description_value(self, setup):
+        print("Service Response : ", setup[0])
+        assert setup[0]["description"] == 'Done'
+
+    def test_change_session_america_summer_result(self, setup):
+        print("Service Response : ", setup[0])
+        assert "Result" in setup[0].keys()
+
+    def test_change_session_america_summer_result_value(self, setup):
+        print("Service Response : ", setup[0]["Result"])
+        assert setup[0]["Result"] == [{'description': 'Done', 'platform': 'MT5_REAL', 'status': 0}]
+
+    def test_change_session_america_summer(self,setup):
+        print("Service Response : ", setup[1])
+        assert  setup[1]["SessionsQuotes"] == [[],
+                                              [{'Close': '1440', 'Open': '0'}],
+                                              [{'Close': '1440', 'Open': '0'}],
+                                              [{'Close': '1440', 'Open': '0'}],
+                                              [{'Close': '1440', 'Open': '0'}],
+                                              [{'Close': '1439', 'Open': '0'}], []]
+        assert setup[1]["SessionsTrades"] == [[],
+                                              [{'Close': '1440', 'Open': '0'}],
+                                              [{'Close': '1440', 'Open': '0'}],
+                                              [{'Close': '1440', 'Open': '0'}],
+                                              [{'Close': '1440', 'Open': '0'}],
+                                              [{'Close': '1439', 'Open': '0'}], []]
+
+        print("Service Response : ", setup[2])
+        assert setup[2]["TimeStart"] == '0'
+        assert setup[2]["TimeExpiration"] == '0'
+
+        print("Service Response : ", setup[3])
+        assert setup[3]["SessionsQuotes"] == [[],
+                                              [{'Close': '1440', 'Open': '0'}],
+                                              [{'Close': '1440', 'Open': '0'}],
+                                              [{'Close': '1440', 'Open': '0'}],
+                                              [{'Close': '1440', 'Open': '0'}],
+                                              [{'Close': '1439', 'Open': '0'}],
+                                              []]
+        assert setup[3]["SessionsTrades"] == [[],
+                                              [{'Close': '1440', 'Open': '0'}],
+                                              [{'Close': '1440', 'Open': '0'}],
+                                              [{'Close': '1440', 'Open': '0'}],
+                                              [{'Close': '1440', 'Open': '0'}],
+                                              [{'Close': '1439', 'Open': '0'}], []]
+        print("Service Response : ", setup[4])
+        assert setup[4]["SessionsQuotes"] == [[],
+                                              [{'Close': '1440', 'Open': '0'}],
+                                              [{'Close': '1440', 'Open': '0'}],
+                                              [{'Close': '1440', 'Open': '0'}],
+                                              [{'Close': '1440', 'Open': '0'}],
+                                              [{'Close': '1439', 'Open': '0'}], []]
+        assert setup[4]["SessionsTrades"] == [[],
+                                              [{'Close': '1440', 'Open': '0'}],
+                                              [{'Close': '1440', 'Open': '0'}],
+                                              [{'Close': '1440', 'Open': '0'}],
+                                              [{'Close': '1440', 'Open': '0'}],
+                                              [{'Close': '1439', 'Open': '0'}], []]
+        print("Service Response : ", setup[5])
+        assert setup[5]["SessionsQuotes"] == [[],
+                                              [{'Close': '1440', 'Open': '0'}],
+                                              [{'Close': '1440', 'Open': '0'}],
+                                              [{'Close': '1440', 'Open': '0'}],
+                                              [{'Close': '1440', 'Open': '0'}],
+                                              [{'Close': '1439', 'Open': '0'}], []]
+        assert setup[5]["SessionsTrades"] == [[],
+                                              [{'Close': '1440', 'Open': '0'}],
+                                              [{'Close': '1440', 'Open': '0'}],
+                                              [{'Close': '1440', 'Open': '0'}],
+                                              [{'Close': '1440', 'Open': '0'}],
+                                              [{'Close': '1439', 'Open': '0'}], []]
