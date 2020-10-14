@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/MT5Profiler-ChangeProfile.iml" filepath="$PROJECT_DIR$/MT5Profiler-ChangeProfile.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/MT5Profiler_AutoTest.iml" filepath="$PROJECT_DIR$/.idea/MT5Profiler_AutoTest.iml" />
     </modules>
   </component>
 </project>
