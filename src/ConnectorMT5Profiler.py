@@ -1,10 +1,11 @@
 import requests
 import json
+import os
 
 
 class Connection_To_MT5Profiler(object):
     def __init__(self):
-        with open('src/credentials.json', "r") as read_file:
+        with open(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'credentials.json'), "r") as read_file:
             self.data_set = json.load(read_file)
         self.session = requests.Session()
         self.session.headers.update = ({'Content-type': 'application/json', 'Accept': 'text/plain', 'Content-Encoding': 'utf-8'})

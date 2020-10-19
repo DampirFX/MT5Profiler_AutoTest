@@ -488,35 +488,6 @@ class Test_ChangeServerSettings_Two_Symbols_One_Not_Found():
         print("Service Response : ", setup)
         assert setup["result"] == [{'description': 'Done', 'platform': 'MT5_REAL', 'status': 0}]
 
-class Test_ChangeServerSettings_Two_Symbols():
-    @pytest.fixture(scope='class')
-    def setup(self):
-        data = {"platforms":["MT5_REAL"],"symbols": [{"symbol": "EURUSD","tradeMode": "TRADE_FULL"},{"symbol": "AUDCAD","tradeMode": "TRADE_FULL"}]}
-        return Connection_To_MT5Profiler().Change_Server_Settings(data)
-
-    def test_changeserversettings_two_symbols_status(self,setup):
-        print("Service Response : ", setup)
-        assert "status" in setup.keys()
-
-    def test_changeserversettings_two_symbols_status_code(self,setup):
-        print("Service Response : ", setup)
-        assert setup["status"] == 0
-
-    def test_changeserversettings_two_symbols_description(self,setup):
-        print("Service Response : ", setup)
-        assert "description" in setup.keys()
-
-    def test_changeserversettings_two_symbols_description_value(self,setup):
-        print("Service Response : ", setup)
-        assert setup["description"] == 'Done'
-
-    def test_changeserversettings_two_symbols_result(self,setup):
-        print("Service Response : ", setup)
-        assert "result" in setup.keys()
-
-    def test_changeserversettings_two_symbols_result_value(self,setup):
-        print("Service Response : ", setup)
-        assert setup["result"] == [{'description': 'Done', 'platform': 'MT5_REAL', 'status': 0}]
 
 class Test_ChangeServerSettings_No_TradeMode_In_Request():
     @pytest.fixture(scope='class')
