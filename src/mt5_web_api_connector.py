@@ -3,7 +3,7 @@ import json
 import os
 
 
-class MT5Connector:
+class MT5Connector(object):
     def __init__(self):
         with open(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'credentials.json'), "r") as read_file:
             self.data_set = json.load(read_file)
